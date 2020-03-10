@@ -37,14 +37,15 @@ app.get('/api/products/:productId', (req, res, next) => {
   const sql = `
     SELECT *
     FROM "products"
-    WHERE ${productId};`;
+    WHERE "productId" = ${productId}`;
+  // values = [image, longDescription, name, price, productId, shortDescription];
 
   db.query(sql)
     .then(result => {
-      if (result.rows === '') {
+      if (result.rows.length === 0) {
         next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
       } else {
-        return res.status(200).json(result.rows);
+        return res.status(200).json(result.rows[0]);
       }
     })
     .catch(err => console.error(err));
