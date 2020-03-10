@@ -19,10 +19,6 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    // const myProduct = this.state.product.map(product => {
-    //   const newNumber = product.price / 100;
-    //   const newerNumber = Number(newNumber).toFixed(2);
-
     return (
       <div className="container-fluid">
         <div className="row">
