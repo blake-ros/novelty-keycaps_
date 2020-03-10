@@ -37,9 +37,11 @@ app.get('/api/products/:productId', (req, res, next) => {
   const sql = `
     SELECT *
     FROM "products"
-    WHERE "productId" = ${productId}`;
+    WHERE "productId" = $1`;
 
-  db.query(sql)
+  const params = [productId];
+
+  db.query(sql, params)
     .then(result => {
       if (result.rows.length === 0) {
         next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
