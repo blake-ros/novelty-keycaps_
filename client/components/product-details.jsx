@@ -8,8 +8,8 @@ class ProductDetails extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch('/api/products/:productId')
+  componentDidMount(productsId) {
+    fetch(`/api/products/:${productsId}`)
       .then(response => {
         return response.json();
       })
