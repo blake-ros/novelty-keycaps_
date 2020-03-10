@@ -33,10 +33,19 @@ app.get('/api/products', (req, res, next) => {
 });
 
 app.get('/api/products/:productId', (req, res, next) => {
+  const { productId } = req.params;
   const sql = `
     SELECT *
     FROM "products"
-    WHERE ${req.body};`;
+    WHERE ${productId};`;
+
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => console.error(err));
+
+  next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
 
 app.use('/api', (req, res, next) => {
