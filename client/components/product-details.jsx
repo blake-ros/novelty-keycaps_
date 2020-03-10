@@ -20,7 +20,7 @@ class ProductDetails extends React.Component {
 
   render() {
     return (
-      null
+      <div className="container-fluid">{product}</div>
     );
   }
 }
