@@ -41,11 +41,13 @@ app.get('/api/products/:productId', (req, res, next) => {
 
   db.query(sql)
     .then(result => {
-      res.status(200).json(result.rows);
+      if (result.rows === '') {
+        next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
+      } else {
+        return res.status(200).json(result.rows);
+      }
     })
     .catch(err => console.error(err));
-
-  next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
 
 app.use('/api', (req, res, next) => {
