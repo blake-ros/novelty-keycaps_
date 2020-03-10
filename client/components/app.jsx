@@ -7,7 +7,8 @@ export default class App extends React.Component {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      view: { name: 'catalog', params: {} }
     };
   }
 
