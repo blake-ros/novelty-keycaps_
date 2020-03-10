@@ -38,7 +38,6 @@ app.get('/api/products/:productId', (req, res, next) => {
     SELECT *
     FROM "products"
     WHERE "productId" = ${productId}`;
-  // values = [image, longDescription, name, price, productId, shortDescription];
 
   db.query(sql)
     .then(result => {
