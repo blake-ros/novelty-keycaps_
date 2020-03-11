@@ -27,7 +27,7 @@ class ProductList extends React.Component {
     const myProducts = this.state.products.map(product => {
       const newNumber = product.price / 100;
       const newerNumber = Number(newNumber).toFixed(2);
-      return <ProductListItem key={product.productId} image={product.image} name={product.name} price={newerNumber} shortDescription={product.shortDescription}/>;
+      return <ProductListItem key={product.productId} onClick={() => this.props.onRender('details', { productId: product.productId })} image={product.image} name={product.name} price={newerNumber} shortDescription={product.shortDescription}/>;
     });
 
     return (
