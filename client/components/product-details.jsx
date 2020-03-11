@@ -21,6 +21,7 @@ class ProductDetails extends React.Component {
     console.log(this.state.product);
     const myProduct = this.state.product;
     console.log(myProduct);
+
     if (!this.state.product) {
       return null;
     }
@@ -33,13 +34,13 @@ class ProductDetails extends React.Component {
             <div className="col-6">
               <div className="card-body">
                 <h1 className="mb-3">{myProduct.name}</h1>
-                <span className="mb-3">{myProduct.price}</span>
+                <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
                 <p>{myProduct.shortDescription}</p>
               </div>
             </div>
           </div>
           <div className="row">
-            <p>{myProduct.longDescription}</p>
+            <p className="pl-4 pr-4">{myProduct.longDescription}</p>
           </div>
         </div>
       </div>
