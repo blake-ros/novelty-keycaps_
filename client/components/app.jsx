@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header.jsx';
 import ProductList from './product-list';
+import ProductDetails from './product-details.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class App extends React.Component {
       isLoading: true,
       view: { name: 'catalog', params: {} }
     };
+    this.setView = this.setView.bind(this);
   }
 
   componentDidMount() {
@@ -27,10 +29,18 @@ export default class App extends React.Component {
   }
 
   render() {
+    const myState = this.state.view;
+    let conditionalRender;
+
+    if (myState.name === 'details') {
+      conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView}/>;
+    } else if (myState.name === 'catalog') {
+      conditionalRender = <ProductList onRender={this.setView} />;
+    }
     return (
       <div>
         <Header />,
-        <ProductList onClick={this.setView}/>
+        {conditionalRender}
       </div>
     );
   }

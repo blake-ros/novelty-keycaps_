@@ -19,6 +19,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className="container-fluid">
         <div className="row">
