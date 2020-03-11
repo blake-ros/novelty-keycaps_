@@ -30,7 +30,6 @@ export default class App extends React.Component {
 
   render() {
     const myState = this.state.view;
-    // console.log(myState);
     let conditionalRender;
 
     if (myState.name === 'details') {

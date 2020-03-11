@@ -24,7 +24,6 @@ class ProductList extends React.Component {
   }
 
   render() {
-    // console.log(this.state.products);
     const myProducts = this.state.products.map(product => {
       const newNumber = product.price / 100;
       const newerNumber = Number(newNumber).toFixed(2);
