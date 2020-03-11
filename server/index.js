@@ -78,11 +78,39 @@ app.get('/api/cart', (req, res, next) => {
 
 app.post('/api/cart', (req, res, next) => {
   const { productId } = req.body;
+  const sql = `
+    SELECT "price"
+    FROM "products"
+    WHERE "productId" = $1
+    `;
+
+  const value = [productId];
+
   if (productId <= 0) {
     return res.status(400).json({
       error: 'productId must be a postive integer'
     });
+  } else {
+    db.query(sql, value)
+      .then(result => {
+        if (result.rows.length === 0) {
+          throw new ClientError('cannot select this productId', 400);
+        }
+        const newSql = `
+          INSERT INTO "carts" ("cartId", "createdAt")
+          VALUES (default, default)
+          RETURNING "cartId"`;
+
+        return db.query(newSql).then(cartId => Object.assign(cartId.rows[0], result.rows[0]));
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(400).json({
+          error: 'This isnt the product you are looking for!'
+        });
+      });
   }
+
 });
 
 app.use('/api', (req, res, next) => {
