@@ -9,33 +9,37 @@ class ProductDetails extends React.Component {
   }
 
   componentDidMount() {
-    fetch(`/api/products/${this.props.newState}`)
+    fetch(`/api/products/${this.props.newState.productId}`)
       .then(response => {
-        response.json();
+        return response.json();
       })
       .then(product => this.setState({ product }))
       .catch(err => console.error(err));
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.product);
     const myProduct = this.state.product;
+    console.log(myProduct);
+    if (!this.state.product) {
+      return null;
+    }
     return (
       <div className="container-fluid">
-        <p onClick={() => this.props.setView('catalog', {})}> &lt; Back to Catalog</p>
+        <button onClick={() => this.props.onRender('catalog', {})}> &lt; Back to Catalog</button>
         <div className="card">
           <div className="row">
             <img className="col-6" src={myProduct.image} alt="product image"></img>
             <div className="col-6">
               <div className="card-body">
                 <h1 className="mb-3">{myProduct.name}</h1>
-                <span className="mb-3">{this.props.price}</span>
+                <span className="mb-3">{myProduct.price}</span>
                 <p>{myProduct.shortDescription}</p>
               </div>
             </div>
           </div>
           <div className="row">
-            <p>{this.props.longDescription}</p>
+            <p>{myProduct.longDescription}</p>
           </div>
         </div>
       </div>

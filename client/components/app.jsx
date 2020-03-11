@@ -30,13 +30,15 @@ export default class App extends React.Component {
 
   render() {
     const myState = this.state.view;
+    // console.log(myState);
     let conditionalRender;
 
     if (myState.name === 'details') {
-      conditionalRender = <ProductDetails newState={this.state.view.params} onRender={this.setView}/>;
+      conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView}/>;
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} />;
     }
+    console.log(this.props.newState);
     return (
       <div>
         <Header />,
