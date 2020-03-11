@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
   setView(name, params) {
     this.setState({
-      view: { name: name, params: params }
+      view: { name, params }
     });
   }
 
@@ -33,7 +33,7 @@ export default class App extends React.Component {
     let conditionalRender;
 
     if (myState.name === 'details') {
-      conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView}/>;
+      conditionalRender = <ProductDetails newState={this.state.view.params} onRender={this.setView}/>;
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} />;
     }
