@@ -58,6 +58,24 @@ app.get('/api/products/:productId', (req, res, next) => {
     .catch(err => console.error(err));
 });
 
+app.get('/api/cart', (req, res, next) => {
+  const sql = `
+    SELECT *
+    FROM "carts"
+    `;
+
+  db.query(sql)
+    .then(result => {
+      res.status(200).json(result.rows);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        error: 'An error occured retrieving the cart'
+      });
+    });
+});
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
