@@ -14,6 +14,7 @@ export default class App extends React.Component {
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount() {
@@ -35,6 +36,9 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(res => res.json())
+      .then(data => this.setState({
+        cart: data
+      }))
       .catch(err => this.setState({ message: err.message }));
   }
 
@@ -47,7 +51,7 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         const myCart = this.state.cart;
-        this.setState({ cart: myCart.concat(data) });
+        this.setState({ cart: myCart.push(data) });
       });
   }
 
@@ -56,14 +60,13 @@ export default class App extends React.Component {
     let conditionalRender;
 
     if (myState.name === 'details') {
-      conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView}/>;
+      conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView} addToCart={this.addToCart}/>;
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} />;
     }
-    console.log(this.props.newState);
     return (
       <div>
-        <Header />,
+        <Header cartItemCount={this.state.cart.length}/>,
         {conditionalRender}
       </div>
     );
