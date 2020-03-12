@@ -34,6 +34,7 @@ class ProductDetails extends React.Component {
                 <h1 className="mb-3">{myProduct.name}</h1>
                 <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
                 <p>{myProduct.shortDescription}</p>
+                <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2">Add To Cart</button>
               </div>
             </div>
           </div>
