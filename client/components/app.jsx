@@ -51,14 +51,13 @@ export default class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         const myCart = this.state.cart;
-        this.setState({ cart: myCart.push(data) });
+        this.setState({ cart: myCart.concat(data) });
       });
   }
 
   render() {
     const myState = this.state.view;
     let conditionalRender;
-
     if (myState.name === 'details') {
       conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView} addToCart={this.addToCart}/>;
     } else if (myState.name === 'catalog') {
