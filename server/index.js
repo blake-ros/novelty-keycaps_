@@ -113,7 +113,7 @@ app.post('/api/cart', (req, res, next) => {
 
         const values = [result.cartId, productId, result.price];
 
-        return db.query(updatedCart, values);
+        return db.query(updatedCart, values).then(result => result.rows[0].cartItemId);
       })
       .then(cartItemId => {
         const updatedCartId = `
@@ -124,11 +124,9 @@ app.post('/api/cart', (req, res, next) => {
                "p"."name",
                "p"."shortDescription"
         FROM "cartItems" as "c"
-        JOIN "products" as "p" using ("productId")
+        JOIN "products" as "p" USING ("productId")
         WHERE "c"."cartItemId" = $1
         `;
-
-        const cartItemId = [cartItemId]
         // console.log(values);
 
         return db.query(updatedCartId, [cartItemId]).then(result => res.status(201).json(result.rows[0]));
