@@ -7,6 +7,7 @@ class CartSummary extends React.Component {
     return (
       <div className="container-fluid">
         <Header cartItemCount={this.state.cart.length}/>,
+        <button onClick={() => this.props.onRender('catalog', {})}> &lt; Back to Catalog</button>
         <h1>My Cart</h1>,
         {CartSummaryItem},
         <h1>Item Total {total}</h1>
