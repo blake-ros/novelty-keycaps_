@@ -59,21 +59,27 @@ app.get('/api/products/:productId', (req, res, next) => {
 });
 
 app.get('/api/cart', (req, res, next) => {
-  const sql = `
-    SELECT *
-    FROM "carts"
+  const { cartId } = req.session;
+
+  if (!cartId) {
+    res.send([]);
+  } else {
+    const sql = `
+    SELECT "c"."cartItemId",
+           "c"."price",
+           "p"."productId",
+           "p"."image",
+           "p"."name",
+           "p"."shortDescription"
+    FROM "cartItems" AS "c"
+    JOIN "products" AS "p" USING ("productId")
+    WHERE "c"."cartId" = $1
     `;
 
-  db.query(sql)
-    .then(result => {
-      res.status(200).json(result.rows);
-    })
-    .catch(err => {
-      console.error(err);
-      res.status(500).json({
-        error: 'An error occured retrieving the cart'
-      });
-    });
+    db.query(sql, [cartId])
+      .then(result => res.json(result.rows))
+      .catch(err => next(err));
+  }
 });
 
 app.post('/api/cart', (req, res, next) => {
@@ -95,7 +101,12 @@ app.post('/api/cart', (req, res, next) => {
       .then(result => {
         if (result.rows.length === 0) {
           throw new ClientError('cannot select this productId', 400);
+        } else {
+          if (req.session.cartId) {
+            return { cartId: req.session.cartId, price: result.rows[0].price };
+          }
         }
+
         const newSql = `
           INSERT INTO "carts" ("cartId", "createdAt")
           VALUES (default, default)
@@ -127,8 +138,6 @@ app.post('/api/cart', (req, res, next) => {
         JOIN "products" as "p" USING ("productId")
         WHERE "c"."cartItemId" = $1
         `;
-        // console.log(values);
-
         return db.query(updatedCartId, [cartItemId]).then(result => res.status(201).json(result.rows[0]));
       })
       // .then(result => console.log(result))
