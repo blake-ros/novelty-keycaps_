@@ -103,6 +103,37 @@ app.post('/api/cart', (req, res, next) => {
 
         return db.query(newSql).then(cartId => Object.assign(cartId.rows[0], result.rows[0]));
       })
+      .then(result => {
+        req.session.cartId = result.cartId;
+        const updatedCart = `
+          INSERT INTO "cartItems" ("cartId", "productId", "price")
+          VALUES ($1, $2, $3)
+          RETURNING "cartItemId"
+          `;
+
+        const values = [result.cartId, productId, result.price];
+
+        return db.query(updatedCart, values);
+      })
+      .then(cartItemId => {
+        const updatedCartId = `
+        SELECT "c"."cartItemId",
+               "c"."price",
+               "p"."productId",
+               "p"."image",
+               "p"."name",
+               "p"."shortDescription"
+        FROM "cartItems" as "c"
+        JOIN "products" as "p" using ("productId")
+        WHERE "c"."cartItemId" = $1
+        `;
+
+        const cartItemId = [cartItemId]
+        // console.log(values);
+
+        return db.query(updatedCartId, [cartItemId]).then(result => res.status(201).json(result.rows[0]));
+      })
+      // .then(result => console.log(result))
       .catch(err => {
         console.error(err);
         res.status(400).json({
