@@ -140,7 +140,6 @@ app.post('/api/cart', (req, res, next) => {
         `;
         return db.query(updatedCartId, [cartItemId]).then(result => res.status(201).json(result.rows[0]));
       })
-      // .then(result => console.log(result))
       .catch(err => {
         console.error(err);
         res.status(400).json({
@@ -149,6 +148,37 @@ app.post('/api/cart', (req, res, next) => {
       });
   }
 
+});
+
+app.post('/api/orders', (req, res, next) => {
+  const { cartId } = req.session;
+  const { name, creditCard, shippingAddress } = req.body;
+
+  if (!name || !creditCard || !shippingAddress) {
+    return res.status(400).json('You must supply a valid name, credit card, and shipping address');
+  }
+
+  if (!cartId) {
+    return res.status(400).json('This is not your cart');
+  }
+
+  const sql = `
+    INSERT INTO "orders" ("cartId", "name", "creditCard", "shippingAddress")
+    VALUES ($1, $2, $3, $4)
+    RETURNING *
+    `;
+
+  const values = [cartId, name, creditCard, shippingAddress];
+
+  db.query(sql, values)
+    .then(result => {
+      delete req.session.cartId;
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400).json({ error: 'There has been a fatal error' });
+    });
 });
 
 app.use('/api', (req, res, next) => {
