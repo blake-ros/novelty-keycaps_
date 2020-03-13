@@ -38,14 +38,14 @@ class CheckoutForm extends React.Component {
     this.props.form(this.state);
   }
 
-  render() {
-    console.log(this.state);
+  render(props) {
+    const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
 
     return (
       <div className="container-fluid">
         <h1>Checkout</h1>
-        {/* <div>{order.total}</div> */}
-        <form onSubmit={this.handleSubmit} >
+        <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group" >
             <label>Name</label>
             <input type="name" className="form-control" onChange={this.handleNameChange}></input>

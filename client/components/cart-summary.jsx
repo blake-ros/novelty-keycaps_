@@ -5,11 +5,6 @@ class CartSummary extends React.Component {
   render(props) {
     const cartArray = this.props.cart;
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
-
-    // const reducer = (accumulator, currentValue) => accumulator + currentValue;
-    // const totalValue = cartArray.price.reduce(reducer);
-    // console.log(totalValue);
-
     let itemsInCart;
     if (cartArray.length === 0) {
       itemsInCart = <h1>No Items In Cart</h1>;
@@ -21,7 +16,7 @@ class CartSummary extends React.Component {
         <button onClick={() => this.props.onRender('catalog', {})}>&lt; Back to Catalog</button>
         {itemsInCart}
         {cartArray.map(item => { return <CartSummaryItem key={item.cartItemId} cartItem={item}/>; })}
-        <h2 className="text-secondary">Total: ${cartTotal}</h2>
+        <h2 className="text-secondary">Item Total: ${cartTotal}</h2>
         <button onClick={() => this.props.onRender('checkout', {})} className="btn btn-primary float-right">Checkout</button>
       </div>
     );
