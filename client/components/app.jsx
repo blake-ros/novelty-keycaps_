@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './header.jsx';
 import ProductList from './product-list';
 import ProductDetails from './product-details.jsx';
+import CartSummary from './cart-summary.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -62,10 +63,12 @@ export default class App extends React.Component {
       conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView} addToCart={this.addToCart}/>;
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} />;
+    } else if (myState.name === 'cart') {
+      conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
     }
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length}/>,
+        <Header cartItemCount={this.state.cart.length} onRender={this.setView} />,
         {conditionalRender}
       </div>
     );
