@@ -157,8 +157,7 @@ app.post('/api/orders', (req, res, next) => {
   if (!name || !creditCard || !shippingAddress) {
     res.status(400).json('You must supply a valid name, credit card, and shipping address');
   }
-  console.log(req.session);
-  console.log(cartId);
+
   if (!cartId) {
     res.status(400).json('This is not your cart');
   }
