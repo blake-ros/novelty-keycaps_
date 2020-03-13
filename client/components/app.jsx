@@ -74,6 +74,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.cart);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
