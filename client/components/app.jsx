@@ -56,6 +56,21 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder({ name, creditCard, shippingAddress }) {
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, creditCard, shippingAddress })
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          cart: [],
+          view: { name: 'catalog', params: {} }
+        });
+      });
+  }
+
   render() {
     const myState = this.state.view;
     let conditionalRender;
