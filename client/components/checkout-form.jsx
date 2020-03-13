@@ -35,6 +35,7 @@ class CheckoutForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.form(this.state);
   }
 
   render() {
@@ -44,14 +45,14 @@ class CheckoutForm extends React.Component {
       <div className="container-fluid">
         <h1>Checkout</h1>
         {/* <div>{order.total}</div> */}
-        <form onSubmit={this.hanldeSubmit} >
+        <form onSubmit={this.handleSubmit} >
           <div className="form-group" >
             <label>Name</label>
             <input type="name" className="form-control" onChange={this.handleNameChange}></input>
             <label>Credit Card</label>
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
             <label>Shipping Address</label>
-            <input type="shipping-address" className="form-control" onChange={this.handleShipping}></input>
+            <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
             <button onClick={() => this.props.onRender('catalog', {})}> &lt; Continue Shopping</button><button type="submit" className="btn btn-primary float-right">Place Order</button>
           </div>
         </form>

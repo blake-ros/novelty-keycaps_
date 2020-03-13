@@ -11,12 +11,13 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: { name: 'checkout', params: {} },
+      view: { name: 'catalog', params: {} },
       cart: []
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +83,7 @@ export default class App extends React.Component {
     } else if (myState.name === 'cart') {
       conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
     } else if (myState.name === 'checkout') {
-      conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
+      conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
     }
     return (
       <div>
