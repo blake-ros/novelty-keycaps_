@@ -11,7 +11,7 @@ export default class App extends React.Component {
     this.state = {
       message: null,
       isLoading: true,
-      view: { name: 'catalog', params: {} },
+      view: { name: 'checkout', params: {} },
       cart: []
     };
     this.setView = this.setView.bind(this);
@@ -57,11 +57,11 @@ export default class App extends React.Component {
       });
   }
 
-  placeOrder({ name, creditCard, shippingAddress }) {
+  placeOrder(orderObj) {
     fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, creditCard, shippingAddress })
+      body: JSON.stringify(orderObj)
     })
       .then(response => response.json())
       .then(data => {
