@@ -16,6 +16,7 @@ class CartSummary extends React.Component {
         <button onClick={() => this.props.onRender('catalog', {})}>&lt; Back to Catalog</button>
         {itemsInCart}
         {cartArray.map(item => { return <CartSummaryItem key={item.cartItemId} cartItem={item}/>; })}
+        <button onClick={() => this.props.onRender('checkout', {})} className="btn btn-primary float-right"></button>
       </div>
     );
   }
