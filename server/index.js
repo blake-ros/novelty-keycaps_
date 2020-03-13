@@ -155,11 +155,11 @@ app.post('/api/orders', (req, res, next) => {
   const { name, creditCard, shippingAddress } = req.body;
 
   if (!name || !creditCard || !shippingAddress) {
-    res.status(400).json('You must supply a valid name, credit card, and shipping address');
+    return res.status(400).json('You must supply a valid name, credit card, and shipping address');
   }
 
   if (!cartId) {
-    res.status(400).json('This is not your cart');
+    return res.status(400).json('This is not your cart');
   }
 
   const sql = `
@@ -174,6 +174,10 @@ app.post('/api/orders', (req, res, next) => {
     .then(result => {
       delete req.session.cartId;
       res.status(201).json(result.rows[0]);
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(400).json({ error: 'There has been a fatal error' });
     });
 });
 
