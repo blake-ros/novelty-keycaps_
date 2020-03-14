@@ -3,6 +3,7 @@ import Header from './header.jsx';
 import ProductList from './product-list';
 import ProductDetails from './product-details.jsx';
 import CartSummary from './cart-summary.jsx';
+import CheckoutForm from './checkout-form.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.placeOrder = this.placeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -56,6 +58,21 @@ export default class App extends React.Component {
       });
   }
 
+  placeOrder(orderObj) {
+    fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderObj)
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          cart: [],
+          view: { name: 'catalog', params: {} }
+        });
+      });
+  }
+
   render() {
     const myState = this.state.view;
     let conditionalRender;
@@ -65,6 +82,8 @@ export default class App extends React.Component {
       conditionalRender = <ProductList onRender={this.setView} />;
     } else if (myState.name === 'cart') {
       conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
+    } else if (myState.name === 'checkout') {
+      conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
     }
     return (
       <div>
