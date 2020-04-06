@@ -8,6 +8,10 @@ A full stack e-commerce web application
 - Node.js
 - Postgresql
 
+## Live Demo
+
+Link: https://wicked-sales.blakeros.com/
+
 ## Features
 
 - View product details
