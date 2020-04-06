@@ -17,6 +17,4 @@ A full stack e-commerce web application
 
 ## Preview 
 
-
-
-
+![](server/public/images/wickedSalesPreview.PNG)
