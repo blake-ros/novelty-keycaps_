@@ -249,6 +249,19 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 18	15	5	9900
 19	15	4	999
 20	15	1	2999
+21	16	3	2900
+22	17	3	2900
+23	18	3	2900
+24	19	3	2900
+25	19	2	2595
+26	20	1	2999
+27	20	2	2595
+28	20	5	9900
+29	20	6	830
+30	21	3	2900
+31	21	2	2595
+32	21	1	2999
+33	21	6	830
 \.
 
 
@@ -272,6 +285,12 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 13	2020-03-11 19:15:19.920752-08
 14	2020-03-12 10:39:38.107954-08
 15	2020-03-13 09:08:08.417721-08
+16	2020-03-13 10:47:10.028532-08
+17	2020-03-13 14:03:33.888062-08
+18	2020-03-13 14:49:51.124266-08
+19	2020-03-13 15:00:44.657146-08
+20	2020-03-13 15:54:48.951935-08
+21	2020-03-13 15:58:24.906399-08
 \.
 
 
@@ -280,6 +299,12 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 --
 
 COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", "createdAt") FROM stdin;
+4	16	Timmmayyy	123456678	123 LearningFuze	2020-03-13 10:47:23.198611-08
+5	17	Blake	1234 1234 1234 1234	123 LearningFuze	2020-03-13 14:48:46.190682-08
+6	18	Blake Ros	1234 1234 1234 1234	123 LearningFuze	2020-03-13 14:50:05.907488-08
+7	19	Blake Ros	1234 1234 1234 1234	123 LearningFuze	2020-03-13 15:54:33.555685-08
+8	20	Jack Choi	4321 4321 4321 4321	432 LearningFuze Dr	2020-03-13 15:55:28.385813-08
+9	21	Timmay is Pai Mei	1234 1234 1234 1234	123 Teaching Students Dr	2020-03-13 15:59:42.121609-08
 \.
 
 
@@ -301,21 +326,21 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 20, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 33, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 15, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 21, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 1, false);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 9, true);
 
 
 --
