@@ -40,7 +40,13 @@ class CheckoutForm extends React.Component {
 
   render(props) {
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
-
+    console.log(this.state);
+    let button;
+    if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
+      button = <button className="invisible"></button>;
+    } else {
+      button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
+    }
     return (
       <div className="container-fluid">
         <h1>Checkout</h1>
@@ -53,7 +59,7 @@ class CheckoutForm extends React.Component {
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
             <label>Shipping Address</label>
             <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
-            <button onClick={() => this.props.onRender('catalog', {})}> &lt; Continue Shopping</button><button type="submit" className="btn btn-primary float-right">Place Order</button>
+            <button className="btn btn-info mt-5" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>{button}
           </div>
         </form>
       </div>

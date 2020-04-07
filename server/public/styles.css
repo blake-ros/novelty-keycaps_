@@ -5,3 +5,7 @@ h1 {
 img {
   object-fit: contain;
 }
+
+.pointer {
+  cursor: pointer;
+}
