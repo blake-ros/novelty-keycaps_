@@ -11,14 +11,14 @@ class CartSummary extends React.Component {
       itemsInCart = <h1>No Items In Cart</h1>;
     } else {
       itemsInCart = <h1>My Cart</h1>;
-      button = <button onClick={() => this.props.onRender('checkout', {})} className="btn btn-primary float-right mr-5 mb-5">Checkout</button>;
+      button = <button onClick={() => this.props.onRender('checkout', {})} className="btn btn-primary float-right mr-4 mb-4">Checkout</button>;
     }
     return (
       <div className="container-fluid">
         <button className="btn btn-info" onClick={() => this.props.onRender('catalog', {})}>Back to Catalog</button>
         {itemsInCart}
         {cartArray.map(item => { return <CartSummaryItem key={item.cartItemId} cartItem={item}/>; })}
-        <h2 className="text-secondary">Item Total: ${cartTotal} {button}</h2>
+        <h4 className="text-secondary">Item Total: ${cartTotal} {button}</h4>
       </div>
     );
   }
