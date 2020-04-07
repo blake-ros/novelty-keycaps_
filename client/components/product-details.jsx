@@ -28,8 +28,8 @@ class ProductDetails extends React.Component {
         <button className="btn btn-info mb-3" onClick={() => this.props.onRender('catalog', {})}>Back to Catalog</button>
         <div className="card">
           <div className="row">
-            <img className="col-6" src={myProduct.image} alt="product image"></img>
-            <div className="col-6">
+            <img className="col-xl-6 col-lg-5 col-md-6 col-xs-12 col-sm-6" src={myProduct.image} alt="product image"></img>
+            <div className="col-xl-6 col-lg-5 col-md-6 col-xs-12 col-sm-6">
               <div className="card-body">
                 <h1 className="mb-3">{myProduct.name}</h1>
                 <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
@@ -39,7 +39,7 @@ class ProductDetails extends React.Component {
             </div>
           </div>
           <div className="row">
-            <p className="pl-4 pr-4">{myProduct.longDescription}</p>
+            <p className="pl-4 pr-4 mt-3 col-12">{myProduct.longDescription}</p>
           </div>
         </div>
       </div>
