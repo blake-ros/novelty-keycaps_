@@ -9,3 +9,8 @@ img {
 .pointer {
   cursor: pointer;
 }
+
+.newOverlay:hover {
+  background-color: lightblue;
+  cursor: pointer;
+}
