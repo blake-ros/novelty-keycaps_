@@ -42,7 +42,7 @@ class CheckoutForm extends React.Component {
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
     let button;
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
-      button = <button className="invisible"></button>;
+      button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
     } else {
       button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
     }
