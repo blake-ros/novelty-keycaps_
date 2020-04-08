@@ -12,4 +12,5 @@ img {
 
 .newOverlay:hover {
   background-color: lightblue;
+  cursor: pointer;
 }
