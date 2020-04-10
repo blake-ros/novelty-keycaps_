@@ -13,8 +13,8 @@ class AddToCartModal extends React.Component {
             <h5 className="text-center">New Item Added</h5>
             <p className="text-center">This item is now in your cart.</p>
             <div className="btn-group w-100">
-              <button className="btn btn-secondary w-50" onClick={() => props.onRender('catalog', {})}>Continue Shopping</button>
-              <button className="btn btn-primary text-white w-50" onClick={() => props.onRender('cart', {})}>View Cart</button>
+              <button className="btn btn-secondary w-50" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>
+              <button className="btn btn-primary text-white w-50" onClick={() => this.props.onRender('cart', {})}>View Cart</button>
             </div>
           </div>
         </div>
