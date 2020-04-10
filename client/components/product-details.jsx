@@ -78,7 +78,7 @@ class ProductDetails extends React.Component {
           </div>
         </div>
         <AddToCartModal showModal={this.state.showModal}
-          onRender={this.setView}
+          newView={this.props.onRender}
           toggleModal={this.toggleModal}
           product={this.state.product} />
       </div>

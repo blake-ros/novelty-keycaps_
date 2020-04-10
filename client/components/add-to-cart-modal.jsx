@@ -1,6 +1,7 @@
 import React from 'react';
 
 class AddToCartModal extends React.Component {
+
   render(props) {
     return (
       <div className={`position-fixed h-100 w-100 ${this.props.showModal.displayNone ? 'd-none' : 'd-flex'} overlay ${this.props.showModal.show ? 'fade-in' : 'fade-out'}`}>
@@ -13,8 +14,8 @@ class AddToCartModal extends React.Component {
             <h5 className="text-center">New Item Added</h5>
             <p className="text-center">This item is now in your cart.</p>
             <div className="btn-group w-100">
-              <button className="btn btn-secondary w-50" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>
-              <button className="btn btn-primary text-white w-50" onClick={() => this.props.onRender('cart', {})}>View Cart</button>
+              <button className="btn btn-secondary w-50" onClick={() => this.props.newView('catalog', {})}>Continue Shopping</button>
+              <button className="btn btn-primary text-white w-50" onClick={() => this.props.newView('cart', {})}>View Cart</button>
             </div>
           </div>
         </div>
