@@ -1,4 +1,5 @@
 import React from 'react';
+import AddToCartModal from './add-to-cart-modal';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -76,6 +77,10 @@ class ProductDetails extends React.Component {
             <p className="pl-4 pr-4 mt-3 col-12">{myProduct.longDescription}</p>
           </div>
         </div>
+        <AddToCartModal showModal={this.state.showModal}
+          setView={this.props.setView}
+          toggleModal={this.toggleModal}
+          product={this.state.product} />
       </div>
     );
   }
