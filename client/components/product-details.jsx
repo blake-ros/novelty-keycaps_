@@ -4,8 +4,39 @@ class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: null
+      product: null,
+      showModal: {
+        show: false,
+        displayNone: true
+      }
     };
+    this.toggleModal = this.toggleModal.bind(this);
+  }
+
+  toggleModal() {
+    if (this.state.showModal.show) {
+      this.setState({
+        showModal: {
+          show: false,
+          displayNone: false
+        }
+      });
+      setTimeout(() => {
+        this.setState({
+          showModal: {
+            show: false,
+            displayNone: true
+          }
+        });
+      });
+    } else {
+      this.setState({
+        showModal: {
+          show: true,
+          displayNone: false
+        }
+      });
+    }
   }
 
   componentDidMount() {
@@ -34,7 +65,10 @@ class ProductDetails extends React.Component {
                 <h1 className="mb-3">{myProduct.name}</h1>
                 <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
                 <p>{myProduct.shortDescription}</p>
-                <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2" onClick={() => this.props.addToCart(myProduct)}>Add To Cart</button>
+                <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2" onClick={() => {
+                  this.props.addToCart(myProduct, '+');
+                  this.toggleModal();
+                }}>Add To Cart</button>
               </div>
             </div>
           </div>
