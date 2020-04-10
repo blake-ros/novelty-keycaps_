@@ -15,3 +15,15 @@ img {
   background-color: lightblue;
   cursor: pointer;
 }
+
+.overlay {
+  background: #00000040;
+  top:  0;
+  left: 0;
+  z-index: 1;
+}
+
+.fade-in {
+  animation: fade-in .75;
+  animation-fill-mode: forwards;
+}

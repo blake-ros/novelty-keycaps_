@@ -49,7 +49,7 @@ class ProductDetails extends React.Component {
       .catch(err => console.error(err));
   }
 
-  render() {
+  render(props) {
     const myProduct = this.state.product;
 
     if (!this.state.product) {
@@ -78,7 +78,7 @@ class ProductDetails extends React.Component {
           </div>
         </div>
         <AddToCartModal showModal={this.state.showModal}
-          setView={this.props.setView}
+          onRender={this.setView}
           toggleModal={this.toggleModal}
           product={this.state.product} />
       </div>
