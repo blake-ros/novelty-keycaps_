@@ -37,14 +37,14 @@ class Carousel extends React.Component {
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          <div className="carousel-item active" data-interval="5000">
             <img className="d-block w-100" src="./images/carousel-image-wicked.jpg" alt="First slide" />
           </div>
-          <div className="carousel-item">
-            <img className="d-block w-100" src="./images/carousel-image-2.jpg" alt="Second slide" />
+          <div className="carousel-item" data-interval="5000">
+            <img className="d-block w-100" src="./images/carousel-image-3.png" alt="Second slide" />
           </div>
-          <div className="carousel-item">
-            <img className="d-block w-100" src="..." alt="Third slide" />
+          <div className="carousel-item" data-interval="5000">
+            <img className="d-block w-100" src="./images/carousel-image-2.jpg" alt="Third slide" />
           </div>
         </div>
         <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
