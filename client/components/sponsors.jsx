@@ -3,17 +3,15 @@ import React from 'react';
 class Sponsors extends React.Component {
   render(props) {
     return (
-      <div className="page-header pt-3">
+      <div className="container-fluid pt-3">
         <h1 className="text-center testimonial">Sponsors</h1>
-        <div className="row d-flex justify-content-between">
-          <div className="col-2"><img src="./images/ducky_thumb.png"></img></div>
-          <div className="col-2"><img src="./images/vortex_thumb.png"></img></div>
-          <div className="col-2"><img></img></div>
-          <div className="col-2"><img></img></div>
-          <div className="col-2"><img></img></div>
-          <div className="col-2"><img></img></div>
+        <div className="container-fluid d-flex justify-content-center">
+          <div className="row justify-content-between align-items-center">
+            <div className="col-3"><img src="./images/ducky_thumb.png"></img></div>
+            <div className="col-3"><img src="./images/vortex_thumb.png"></img></div>
+            <div className="col-3"><img src="./images/varmilo_new2_thumb.png"></img></div>
+          </div>
         </div>
-        <div className="page-header">stuff here</div>
       </div>
     );
   }
