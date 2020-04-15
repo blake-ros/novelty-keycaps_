@@ -4,6 +4,7 @@ import ProductList from './product-list';
 import ProductDetails from './product-details.jsx';
 import CartSummary from './cart-summary.jsx';
 import CheckoutForm from './checkout-form.jsx';
+import Sponsors from './sponsors.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -89,6 +90,7 @@ export default class App extends React.Component {
       <div>
         <Header cartItemCount={this.state.cart.length} onRender={this.setView} />,
         {conditionalRender}
+        <Sponsors />
       </div>
     );
   }

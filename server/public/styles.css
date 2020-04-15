@@ -1,6 +1,27 @@
 h1 {
   color: Red;
   font-family: Cairo;
+  background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+}
+
+.sponsorOverlay {
+  background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+}
+
+/* .vortex-thumb {
+  background-image: url(./images/ducky_thumb.png);
+  object-fit: contain;
+  height: 100px;
+} */
+
+/* .sponsorsFix {
+  height: 100px;
+} */
+
+.testimonial {
+  color: red;
 }
 
 img {
@@ -10,6 +31,14 @@ img {
 .pointer {
   cursor: pointer;
 }
+
+.newOverlay {
+  background-color: lightgrey;
+}
+
+/* .background-overlay {
+  background-color: cornsilk;
+} */
 
 .newOverlay:hover {
   background-color: lightblue;
