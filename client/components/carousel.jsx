@@ -20,6 +20,10 @@ class Carousel extends React.Component {
             <img className="d-block w-100" src="#" alt="Third slide"></img>
           </div>
         </div>
+        <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span className="sr-only">Previous</span>
+        </a>
       </div>
     );
   }
