@@ -16,6 +16,9 @@ class Carousel extends React.Component {
           <div className="carousel-item">
             <img className="d-block w-100" src="#" alt="Second slide"></img>
           </div>
+          <div className="carousel-item">
+            <img className="d-block w-100" src="#" alt="Third slide"></img>
+          </div>
         </div>
       </div>
     );
