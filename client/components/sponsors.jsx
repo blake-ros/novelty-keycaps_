@@ -13,6 +13,7 @@ class Sponsors extends React.Component {
             <div className="col-3"><img src="./images/leopold_thumb.png"></img></div>
           </div>
         </div>
+        <h1 className="page-header text-center testimonial pt-3 pb-3">Built by Blake Ros &copy;</h1>
       </div>
     );
   }
