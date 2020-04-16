@@ -19,12 +19,14 @@ export default class App extends React.Component {
       showInitialModal: {
         show: true,
         displayNone: false
-      }
+      },
+      fadeOut: false
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.placeOrder = this.placeOrder.bind(this);
+    this.toggleInitialModal = this.toggleInitialModal.bind(this);
   }
 
   componentDidMount() {
@@ -82,14 +84,14 @@ export default class App extends React.Component {
 
   toggleInitialModal() {
     this.setState({
-      showIntroModal: {
+      showInitialModal: {
         show: false,
         displayNone: false
       }
     });
     setTimeout(() => {
       this.setState({
-        showIntroModal: {
+        showInitialModal: {
           show: false,
           displayNone: true
         }
@@ -103,7 +105,7 @@ export default class App extends React.Component {
     if (myState.name === 'details') {
       conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView} addToCart={this.addToCart} id={this.state.view.params}/>;
     } else if (myState.name === 'catalog') {
-      conditionalRender = <ProductList onRender={this.setView} toggleInitialModal={this.toggleInitialModal} />;
+      conditionalRender = <ProductList onRender={this.setView} toggleInitialModal={this.toggleInitialModal} showInitialModal={this.state.showInitialModal} />;
     } else if (myState.name === 'cart') {
       conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
     } else if (myState.name === 'checkout') {
@@ -111,7 +113,7 @@ export default class App extends React.Component {
     }
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length} onRender={this.setView} />,
+        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />,
         {conditionalRender}
         <Carousel />
         <Sponsors />

@@ -78,3 +78,28 @@ img {
 .descriptionText {
   font-family: 'Crimson Text', serif;
 }
+
+.fade-in {
+  animation: fade-in .75s;
+  animation-fill-mode: forwards;
+}
+
+.fade-out {
+  animation: fade-out .75s;
+  animation-fill-mode: forwards;
+}
+
+.slide-in {
+  animation: slide-in .75s;
+  animation-fill-mode: forwards;
+}
+
+.slide-out {
+  animation: slide-out .75s;
+  animation-fill-mode: forwards;
+}
+
+.modal-message {
+  max-width: 500px;
+  margin: auto;
+}
