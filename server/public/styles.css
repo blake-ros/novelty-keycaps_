@@ -56,3 +56,29 @@ img {
   animation: fade-in .75;
   animation-fill-mode: forwards;
 }
+
+.slide-1 {
+  background-image: linear-gradient(#00000050, #00000050), url('./images/carousel-image-wicked.jpg')
+}
+
+.slide-2 {
+  background-image: linear-gradient(#00000050, #00000050), url('./images/carousel-image-2.jpg')
+}
+
+.slide-3 {
+  background-image: linear-gradient(#00000050, #00000050), url('./images/carousel-image-3.png')
+}
+
+.carousel-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-item {
+  height: 75vh;
+}
+
+.carousel-item img {
+  height: 75vh;
+  object-fit: cover;
+}
