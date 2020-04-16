@@ -31,7 +31,7 @@ class ProductList extends React.Component {
     });
 
     return (
-      <div className="container-fluid d-flex flex-wrap justify-content-center">{myProducts}</div>
+      <div className="container-fluid d-flex flex-wrap justify-content-center productBackground pb-4">{myProducts}</div>
     );
   }
 }
