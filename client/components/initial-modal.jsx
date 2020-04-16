@@ -10,9 +10,9 @@ function InitialModal(props) {
           <h5 className="text-center">Novelty Keycaps_ Demo</h5>
           <div className="d-flex">
           </div>
-          <p className="text-center">Welcome to my e-commerce webpage Novelty Keycaps_ this website is a demo and no real purchases will be made. Please refrain from using your personal information!</p>
-          <div className="btn-group w-100">
-            <button className="btn btn-danger w-100"
+          <p className="text-center">Welcome to my e-commerce webpage Novelty Keycaps_ this website is a demo and no real purchases will be made. Please refrain from using your personal information at checkout!</p>
+          <div className="text-center">
+            <button className="btn btn-primary"
               onClick={() => props.toggleInitialModal()}>Accept</button>
           </div>
         </div>
