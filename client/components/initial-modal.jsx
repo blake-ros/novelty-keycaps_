@@ -1,8 +1,6 @@
 import React from 'react';
 
 function InitialModal(props) {
-  console.log(props);
-  console.log(props.showInitialModal.show);
   return (
     <div className={`position-fixed h-100 w-100 overlay ${props.showInitialModal.displayNone ? 'd-none' : 'd-flex'} ${props.showInitialModal.show ? 'fade-in' : 'fade-out'}`}>
       <div className="m-auto p-3">

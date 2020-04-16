@@ -3,8 +3,6 @@ import InitialModal from './initial-modal.jsx';
 
 class Header extends React.Component {
   render(props) {
-    console.log(this.props);
-    console.log(this.props.showInitialModal);
     const testimonial = 'The Ultimate Keycap Catalog';
     return (
       <div className="page-header">
