@@ -1,7 +1,7 @@
 import React from 'react';
 
 class InitialModal extends React.Component {
-  render() {
+  render(props) {
     return (
       <div className={`position-fixed h-100 w-100 overlay ${props.showInitialModal.displayNone ? 'd-none' : 'd-flex'} ${props.showInitialModal.show ? 'fade-in' : 'fade-out'}`}>Stuff Here</div>
         <div className="m-auto p-3">

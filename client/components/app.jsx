@@ -6,6 +6,7 @@ import CartSummary from './cart-summary.jsx';
 import CheckoutForm from './checkout-form.jsx';
 import Sponsors from './sponsors.jsx';
 import Carousel from './carousel.jsx';
+import InitialModal from './initial-modal.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,7 +15,11 @@ export default class App extends React.Component {
       message: null,
       isLoading: true,
       view: { name: 'catalog', params: {} },
-      cart: []
+      cart: [],
+      showInitialModal: {
+        show: true,
+        displayNone: false
+      }
     };
     this.setView = this.setView.bind(this);
     this.getCartItems = this.getCartItems.bind(this);
@@ -75,13 +80,30 @@ export default class App extends React.Component {
       });
   }
 
+  toggleInitialModal() {
+    this.setState({
+      showIntroModal: {
+        show: false,
+        displayNone: false
+      }
+    });
+    setTimeout(() => {
+      this.setState({
+        showIntroModal: {
+          show: false,
+          displayNone: true
+        }
+      });
+    }, 750);
+  }
+
   render() {
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
       conditionalRender = <ProductDetails newState={myState.params} onRender={this.setView} addToCart={this.addToCart} id={this.state.view.params}/>;
     } else if (myState.name === 'catalog') {
-      conditionalRender = <ProductList onRender={this.setView} />;
+      conditionalRender = <ProductList onRender={this.setView} toggleInitialModal={this.toggleInitialModal} />;
     } else if (myState.name === 'cart') {
       conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} />;
     } else if (myState.name === 'checkout') {
