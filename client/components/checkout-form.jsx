@@ -58,9 +58,9 @@ class CheckoutForm extends React.Component {
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
             <label>Shipping Address</label>
             <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
-            <div className="for-check ml-3">
+            <div className="for-check ml-3 mt-3">
               <input type="checkbox" className="form-check-input" id="check"></input>
-              <label className="form-check-label" htmlFor="check">I understand to not use my personal information at checkout</label>
+              <label className="form-check-label" htmlFor="check"><b>I understand to not use my personal information at checkout</b></label>
             </div>
             <button className="btn btn-info mt-5" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>{button}
           </div>
