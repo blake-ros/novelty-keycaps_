@@ -100,6 +100,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
@@ -113,7 +114,7 @@ export default class App extends React.Component {
     }
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />,
+        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
         {conditionalRender}
         <Carousel />
         <Sponsors />

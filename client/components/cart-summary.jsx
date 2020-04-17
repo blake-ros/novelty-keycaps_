@@ -8,9 +8,9 @@ class CartSummary extends React.Component {
     let itemsInCart;
     let button;
     if (cartArray.length === 0) {
-      itemsInCart = <h1>No Items In Cart</h1>;
+      itemsInCart = <h1 className="mt-3">No Items In Cart</h1>;
     } else {
-      itemsInCart = <h1>My Cart</h1>;
+      itemsInCart = <h1 className="mt-3">My Cart</h1>;
       button = <button onClick={() => this.props.onRender('checkout', {})} className="btn btn-primary float-right mr-4 mb-4">Checkout</button>;
     }
     return (
