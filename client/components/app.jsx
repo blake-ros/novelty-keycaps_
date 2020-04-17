@@ -6,7 +6,6 @@ import CartSummary from './cart-summary.jsx';
 import CheckoutForm from './checkout-form.jsx';
 import Sponsors from './sponsors.jsx';
 import Carousel from './carousel.jsx';
-import InitialModal from './initial-modal.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -100,7 +99,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
