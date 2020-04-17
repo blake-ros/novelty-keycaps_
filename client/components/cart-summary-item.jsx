@@ -4,36 +4,60 @@ class CartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: true
+      quantity: true,
+      remove: false
     };
+    this.removeItemModal = this.removeItemModal.bind(this);
+    this.showRemoveItemModal = this.showRemoveItemModal.bind(this);
+    this.hideRemoveModal = this.hideRemoveModal.bind(this);
+  }
+
+  showRemoveItemModal(event) {
+    event.preventDefault();
+    this.setState({
+      remove: true
+    });
   }
 
   removeItemModal() {
-    return (
-      <div className={`position-fixed h-100 w-100 ${this.props.showModal.displayNone ? 'd-none' : 'd-flex'} overlay ${this.props.showModal.show ? 'fade-in' : 'fade-out'}`}>
-        <div className="m-auto p-4">
-          <div className={`bg-white rounded p-3 modal-message ${this.props.showModal.show ? 'slide-in' : 'slide-out'}`}>
-            <div className="d-flex">
-              <i className="far fa-times-circle cancel-button ml-auto"
-                onClick={this.props.toggleModal} />
-            </div>
-            <h5 className="text-center">New Item Added</h5>
-            <p className="text-center">This item is now in your cart.</p>
-            <div>
-              <button className="btn btn-secondary mr-2 mb-4" onClick={() => this.props.newView('catalog', {})}>Continue Shopping</button>
-              <button className="btn btn-primary text-white ml-2 mb-4" onClick={() => this.props.newView('cart', {})}>View Cart</button>
+
+    if (this.state.remove === true) {
+      return (
+        <div className="position-fixed h-100 w-100 overlay d-flex">
+          <div className="m-auto p-3">
+            <div className="bg-white rounded p-3 modal-message">
+              <div className="mt-2">
+                <h3>Remove this Item?</h3>
+              </div>
+              <div className="mt-3">
+                <h5>Do you want to remove this from your cart?</h5>
+                <h5>Item: </h5>
+                <h5>Qty: </h5>
+              </div>
+              <div className="d-flex justify-content-around mt-4">
+                <button className="btn btn-primary" onClick={this.hideRemoveModal}>Keep in cart</button>
+                <button className="btn btn-danger">Remove</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 
-  render() {
+  hideRemoveModal(event) {
+    event.preventDefault();
+    this.setState({
+      remove: false
+    });
+  }
+
+  render(props) {
     const cartItem = this.props.cartItem;
 
     return (
       <div className="card mb-3 mt-3" style={{ maxWidth: '540 px' }}>
+        {this.removeItemModal()}
         <div className="row no-gutters">
           <div className="col-md-4">
             <img src={cartItem.image} className="card-img" alt="product-image"></img>
@@ -52,7 +76,7 @@ class CartSummaryItem extends React.Component {
                   <i className="fas fa-plus"></i>
                 </div>
               </div>
-              <button onClick={this.removeItemModal} className="btn btn-danger mt-2">Remove</button>
+              <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2">Remove</button>
             </div>
           </div>
         </div>
