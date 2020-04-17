@@ -6,7 +6,6 @@ import CartSummary from './cart-summary.jsx';
 import CheckoutForm from './checkout-form.jsx';
 import Sponsors from './sponsors.jsx';
 import Carousel from './carousel.jsx';
-import InitialModal from './initial-modal.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -113,7 +112,7 @@ export default class App extends React.Component {
     }
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />,
+        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
         {conditionalRender}
         <Carousel />
         <Sponsors />
