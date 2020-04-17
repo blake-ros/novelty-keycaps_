@@ -262,6 +262,55 @@ COPY public."cartItems" ("cartItemId", "cartId", "productId", price) FROM stdin;
 31	21	2	2595
 32	21	1	2999
 33	21	6	830
+34	22	3	2900
+35	23	3	2900
+36	24	1	2999
+37	24	1	2999
+38	25	3	2900
+39	26	1	9999
+40	26	1	9999
+41	26	1	9999
+42	26	1	9999
+43	26	1	9999
+44	26	1	9999
+45	26	1	9999
+46	26	1	9999
+47	26	1	9999
+48	26	1	9999
+49	26	1	9999
+50	26	2	11000
+51	26	1	9999
+52	26	1	9999
+53	26	1	9999
+54	26	1	9999
+55	26	1	9999
+56	26	1	9999
+57	26	1	9999
+58	26	1	9999
+59	26	1	9999
+60	26	1	9999
+61	26	1	9999
+62	26	1	9999
+63	26	1	9999
+64	26	1	9999
+65	26	1	9999
+66	26	1	9999
+67	26	1	9999
+68	26	2	11000
+69	26	1	9999
+70	26	2	11000
+71	26	1	9999
+72	26	1	9999
+73	26	1	9999
+74	26	1	9999
+75	26	1	9999
+76	26	1	9999
+77	26	1	9999
+78	26	1	9999
+79	26	1	9999
+80	27	1	9999
+81	28	2	11000
+82	29	1	9999
 \.
 
 
@@ -291,6 +340,14 @@ COPY public.carts ("cartId", "createdAt") FROM stdin;
 19	2020-03-13 15:00:44.657146-08
 20	2020-03-13 15:54:48.951935-08
 21	2020-03-13 15:58:24.906399-08
+22	2020-04-06 11:05:18.22049-08
+23	2020-04-07 12:53:14.009517-08
+24	2020-04-08 14:20:23.763903-08
+25	2020-04-08 14:23:59.438755-08
+26	2020-04-10 11:16:22.845636-08
+27	2020-04-15 09:26:50.970496-08
+28	2020-04-16 11:27:24.18025-08
+29	2020-04-16 14:05:24.864834-08
 \.
 
 
@@ -305,6 +362,8 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 7	19	Blake Ros	1234 1234 1234 1234	123 LearningFuze	2020-03-13 15:54:33.555685-08
 8	20	Jack Choi	4321 4321 4321 4321	432 LearningFuze Dr	2020-03-13 15:55:28.385813-08
 9	21	Timmay is Pai Mei	1234 1234 1234 1234	123 Teaching Students Dr	2020-03-13 15:59:42.121609-08
+10	24	a	a	a	2020-04-08 14:23:55.288614-08
+11	25	a	a	a	2020-04-08 14:26:47.771038-08
 \.
 
 
@@ -313,12 +372,12 @@ COPY public.orders ("orderId", "cartId", name, "creditCard", "shippingAddress", 
 --
 
 COPY public.products ("productId", name, price, image, "shortDescription", "longDescription") FROM stdin;
-1	Shake Weight	2999	/images/shake-weight.jpg	Dynamic Inertia technology ignites muscles in arms, shoulders, and chest.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-2	ShamWow	2595	/images/shamwow.jpg	It's like a chamois, towel, and sponge, all in one! Soaks up to 10x it's weight in any liquid!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-3	Snuggie	2900	/images/snuggie.jpg	Super-Soft Fleece with pockets! One Size fits all Adults! Keeps you Warm & Your Hands-Free!	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-4	Wax Vac	999	/images/wax-vac.jpg	Gentle way to remove ear wax. Safe and hygienic. Reduces the risk of painful infections.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-5	Ostrich Pillow	9900	/images/ostrich-pillow.jpg	Create your own snugly space in the world and feel-good anywhere with the ultimate cocoon pillow.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
-6	Tater Mitts	830	/images/tater-mitts.jpg	8 Seconds is all you need with Tater Mitts. Quickly and easily prepare all your favorite potato dishes with Tater Mitts.	Lorem ipsum dolor amet fashion axe pour-over jianbing, adaptogen waistcoat tacos master cleanse pitchfork next level. Thundercats pour-over chartreuse 90's. Master cleanse hot chicken ennui offal. Freegan slow-carb offal hell of. Umami polaroid wolf slow-carb next level. Gentrify cardigan seitan, kombucha tacos chambray roof party typewriter man braid. Tote bag lo-fi hell of chia fam hammock\\n.Aesthetic photo booth la croix, vaporware leggings biodiesel man braid tumeric skateboard tousled slow-carb four dollar toast synth pabst pickled. Typewriter church-key chia slow-carb vice gochujang actually. Shoreditch austin woke hot chicken, single-origin coffee ugh affogato four loko green juice. Migas iPhone four dollar toast mustache.
+1	S60 Moonrocks	9999	/images/S60-Moonrocks.jpg	A NASA enthusiasts dream keycap set	Includes a fully programmable software via QMK software. RBG Underglow for moonlight effects. Compact and efficient 65% layout. This product is made from high grade Doubleshot polycarbonate plastics. S60 is inspired by intellect and craftsmanship that transpires into their work on this unique piece. Additionally this set offers additional keycaps for numpad and bonus keycap sets for spacebar, espape, and backspace. If you choose this S60 keycap set you will not be dissapointed
+2	GMK Dolphin	11000	/images/GMK-Dolphin.jpg	A clean ocean blue and grey keycap set	This GMK keycap set had ocean lovers in mind with this subtle varieties of ocean blue colors. Every GMK product is unique and this one is no different. If you're looking for a product that fits a water lifestyle then this is the keycap set for you. The soft grey color mixed in with the strong blue gives inspiration to the dolphin. This keycap set is created with Cherry's original double-shot molding equipment using the highest quality ABS plastic, and we have used custom colors specifically for this set to achieve the high contrast aesthetic of this ocean inspired colorway.
+3	SA Symbiosis	12000	/images/SA-Symbiosis.jpg	A masterfully crafted unique keycap set	If you want to stand out then this keycap set is for you. SA has done it again with this masterfully crafted roman numeral inspired keycap set. The yellow enter keycap ties in all the soft grey and blue notes of this keycap set. The origin Symbolics keyboards were engineering masterpieces. The Symbiosis keycap set provides an updated experience with full sculpting and improved legends. Made out of Doubleshot ABS materials.
+4	SA Royalty	10999	/images/SA-Royalty.jpg	A Bespoke take on an iconic Royal colorway	First conceived by the first time keycap artist ye cole and manufactured by Maxkey, draws colors from diverse sources. Its primary visual inspiration is The Royal Tenenbaums, a critically acclaimed Wes Anderson film set in an atemporal rendition of New York City. Royalty also borrows from sepia-toned photographs and traditional Japanese temples. We think the set brings to mind a Will Ferrell-esque vision of the 1970s, including its computer industry. Shades of red were liberally applied to mainfram panels and suits alike.
+5	SA Nuclear	6900	/images/SA-Nuclear.png	A rich green and purple mix of keycaps modeling a nuclear reactor	A full set of double shot keycaps for Cherry switches, USA layout, Filco Majestouch keyboards. This set contains every keycap for the full size 104 key USA Majestouch keyboard but will fit a USA Tenkeyles too. These keycaps come with costar stabilizers glued in place. You can carefully remove them for Cherry stabs.
+6	PBT Sherbert	9999	/images/PBT-Sherbert.png	Gradient shebert ice cream inspired keycap colorway.	121 Key PBT Double Shot Backlist Keycap Set - Rainbow Sherbert. This keyboard set comes with the standard 104-key Base Set with + 17 add-on keys. The only six-tone PBT backlist keycap set currently available. Great shine-through performance. Legends are clearly visible with high-luminance LED. Additional 8-key kit for ISO layout keybards are available with this set.
 \.
 
 
@@ -326,21 +385,21 @@ COPY public.products ("productId", name, price, image, "shortDescription", "long
 -- Name: cartItems_cartItemId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 33, true);
+SELECT pg_catalog.setval('public."cartItems_cartItemId_seq"', 82, true);
 
 
 --
 -- Name: carts_cartId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."carts_cartId_seq"', 21, true);
+SELECT pg_catalog.setval('public."carts_cartId_seq"', 29, true);
 
 
 --
 -- Name: orders_orderId_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public."orders_orderId_seq"', 9, true);
+SELECT pg_catalog.setval('public."orders_orderId_seq"', 11, true);
 
 
 --
