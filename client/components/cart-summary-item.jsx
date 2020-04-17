@@ -1,7 +1,14 @@
 import React from 'react';
 
 class CartSummaryItem extends React.Component {
-  render(props) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      quantity: true
+    };
+  }
+
+  render() {
     const cartItem = this.props.cartItem;
 
     return (
