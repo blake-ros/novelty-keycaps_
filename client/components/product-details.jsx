@@ -57,7 +57,7 @@ class ProductDetails extends React.Component {
     }
     return (
       <div className="container-fluid">
-        <button className="btn btn-info mb-3" onClick={() => this.props.onRender('catalog', {})}>Back to Catalog</button>
+        <button className="btn btn-info mb-3 mt-3" onClick={() => this.props.onRender('catalog', {})}>Back to Catalog</button>
         <div className="card">
           <div className="row">
             <img className="col-xl-6 col-lg-5 col-md-6 col-xs-12 col-sm-6" src={myProduct.image} alt="product image"></img>
