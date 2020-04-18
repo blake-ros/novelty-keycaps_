@@ -4,7 +4,7 @@ class Carousel extends React.Component {
 
   render() {
     return (
-      <div id="carousel-captions" className="carousel slide mt-5" data-ride="carousel">
+      <div id="carousel-captions" className="carousel slide" data-ride="carousel">
         <ol className="carousel-indicators">
           <li data-target="#carousel-captions" data-slide-to="0" className="active"></li>
           <li data-target="#carousel-captions" data-slide-to="1"></li>

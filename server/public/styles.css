@@ -1,8 +1,6 @@
 h1 {
   color: Red;
   font-family: Cairo;
-  background-color: #000000;
-  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
 }
 
 .sponsorOverlay {
@@ -12,6 +10,7 @@ h1 {
 
 .testimonial {
   color: red;
+  font-family: Cairo;
 }
 
 img {
@@ -71,7 +70,6 @@ img {
 
 .productBackground {
   border: 5px solid red;
-  border-radius: 30px;
   background-color: #ffc6c4;
 }
 
@@ -109,6 +107,14 @@ img {
   top: 50%;
 }
 
-.modalPosition {
-  top: 50%;
+.sponsorsBackground {
+  background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #958e69 74%);
+  /* background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
+}
+
+.headerBackground {
+background-color: #958e69;
+background-image: linear-gradient(315deg, #958e69 0%, #000000 99%);
 }
