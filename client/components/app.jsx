@@ -98,6 +98,10 @@ export default class App extends React.Component {
     }, 750);
   }
 
+  removeItem(cartItemId) {
+
+  }
+
   render() {
     const myState = this.state.view;
     let conditionalRender;
