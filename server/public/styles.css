@@ -1,8 +1,8 @@
 h1 {
   color: Red;
   font-family: Cairo;
-  background-color: #000000;
-  background-image: linear-gradient(315deg, #000000 0%, #414141 74%);
+  /* background-color: #000000;
+  background-image: linear-gradient(315deg, #000000 0%, #414141 74%); */
 }
 
 .sponsorOverlay {
@@ -106,9 +106,5 @@ img {
 
 .confirm-remove-modal {
   z-index: 10;
-  top: 50%;
-}
-
-.modalPosition {
   top: 50%;
 }
