@@ -18,7 +18,7 @@ class CartSummary extends React.Component {
         <button className="btn btn-info mt-3" onClick={() => this.props.onRender('catalog', {})}>Back to Catalog</button>
         {itemsInCart}
         {cartArray.map(item => { return <CartSummaryItem key={item.cartItemId} cartItem={item}/>; })}
-        <h4 className="text-secondary">Item Total: ${cartTotal} {button}</h4>
+        <h4 className="text-secondary mb-3">Item Total: ${cartTotal} {button}</h4>
       </div>
     );
   }
