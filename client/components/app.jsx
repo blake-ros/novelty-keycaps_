@@ -110,10 +110,18 @@ export default class App extends React.Component {
     } else if (myState.name === 'checkout') {
       conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
     }
+
+    let carouselRender;
+    if (myState.name !== 'catalog') {
+      carouselRender = <div className="d-none"></div>;
+    } else {
+      carouselRender = <Carousel />;
+    }
+
     return (
       <div>
         <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
-        <Carousel />
+        {carouselRender}
         {conditionalRender}
         <Sponsors />
       </div>
