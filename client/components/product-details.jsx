@@ -66,7 +66,16 @@ class ProductDetails extends React.Component {
                 <h1 className="mb-3">{myProduct.name}</h1>
                 <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
                 <p>{myProduct.shortDescription}</p>
-                <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2" onClick={() => {
+                <div className="d-flex justify-content-start">
+                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementQuantity}>
+                    <i className="fas fa-minus"></i>
+                  </div>
+                  <input type="number" className="text-center inputBox" onChange={this.changeQuantityHandler} value={this.state.quantity} onBlur={this.blurQuantityHandler} />
+                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementQuantity}>
+                    <i className="fas fa-plus"></i>
+                  </div>
+                </div>
+                <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2 mt-3" onClick={() => {
                   this.props.addToCart(myProduct, '+');
                   this.toggleModal();
                 }}>Add To Cart</button>

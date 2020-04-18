@@ -118,3 +118,15 @@ img {
 background-color: #958e69;
 background-image: linear-gradient(315deg, #958e69 0%, #000000 99%);
 }
+
+.quantityStyle {
+  width: 30px;
+}
+
+.quantityStyle:hover {
+  cursor: pointer;
+}
+
+.inputBox {
+  width: 60px;
+}
