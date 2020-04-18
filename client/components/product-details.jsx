@@ -6,12 +6,17 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = {
       product: null,
+      quantity: 1,
       showModal: {
         show: false,
         displayNone: true
       }
     };
     this.toggleModal = this.toggleModal.bind(this);
+    this.quantityChange = this.quantityChange.bind(this);
+    this.incrementItem = this.incrementItem.bind(this);
+    this.decrementItem = this.decrementItem.bind(this);
+    this.blurQuantity = this.blurQuantity.bind(this);
   }
 
   toggleModal() {
@@ -36,6 +41,38 @@ class ProductDetails extends React.Component {
           show: true,
           displayNone: false
         }
+      });
+    }
+  }
+
+  decrementItem(event) {
+    let quantity = this.state.quantity;
+    if (quantity === 1) {
+      return null;
+    } else {
+      this.setState({
+        quantity: --quantity
+      });
+    }
+  }
+
+  incrementItem(event) {
+    let quantity = this.state.quantity;
+    this.setState({
+      quantity: ++quantity
+    });
+  }
+
+  quantityChange(event) {
+    this.setState({
+      quantity: parseInt(event.currentTarget.value)
+    });
+  }
+
+  blurQuantity(event) {
+    if (this.state.quantity === 0 || isNaN(this.state.quantity)) {
+      this.setState({
+        quantity: 1
       });
     }
   }
@@ -66,12 +103,13 @@ class ProductDetails extends React.Component {
                 <h1 className="mb-3">{myProduct.name}</h1>
                 <span className="mb-3 text-secondary">${(myProduct.price * 0.01).toFixed(2)}</span>
                 <p>{myProduct.shortDescription}</p>
+                <p className="mt-5">Quantity:</p>
                 <div className="d-flex justify-content-start">
-                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementQuantity}>
+                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementItem}>
                     <i className="fas fa-minus"></i>
                   </div>
-                  <input type="number" className="text-center inputBox" onChange={this.changeQuantityHandler} value={this.state.quantity} onBlur={this.blurQuantityHandler} />
-                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementQuantity}>
+                  <input type="number" className="text-center justify-content-center inputBox" onChange={this.quantityChange} value={this.state.quantity} onBlur={this.blurQuantity} readOnly/>
+                  <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementItem}>
                     <i className="fas fa-plus"></i>
                   </div>
                 </div>
