@@ -118,8 +118,6 @@ export default class App extends React.Component {
       carouselRender = <Carousel />;
     }
 
-    console.log(this.state);
-
     return (
       <div>
         <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />

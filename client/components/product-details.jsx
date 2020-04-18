@@ -70,7 +70,7 @@ class ProductDetails extends React.Component {
   }
 
   blurQuantity(event) {
-    if (this.state.quantity === 0 || isNaN(this.state.quantity)) {
+    if (this.state.quantity === 0) {
       this.setState({
         quantity: 1
       });
