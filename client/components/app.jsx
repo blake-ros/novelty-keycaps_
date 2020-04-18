@@ -113,8 +113,8 @@ export default class App extends React.Component {
     return (
       <div>
         <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
-        {conditionalRender}
         <Carousel />
+        {conditionalRender}
         <Sponsors />
       </div>
     );

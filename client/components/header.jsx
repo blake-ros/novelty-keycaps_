@@ -1,5 +1,6 @@
 import React from 'react';
 import InitialModal from './initial-modal.jsx';
+import Carousel from './carousel.jsx';
 
 class Header extends React.Component {
   render(props) {
