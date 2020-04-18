@@ -67,15 +67,6 @@ class CartSummaryItem extends React.Component {
               <h2 className="card-title">{cartItem.name}</h2>
               <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>
               <p className="card-text mt-3">{cartItem.shortDescription}</p>
-              <div className="d-flex">
-                <div className="d-flex align-items-center justify-content-center">
-                  <i className="fas fa-minus"></i>
-                </div>
-                <input type="number" className="text-center" value={this.state.quantity} />
-                <div className="d-flex align-items-center justify-content-center">
-                  <i className="fas fa-plus"></i>
-                </div>
-              </div>
               <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2">Remove</button>
             </div>
           </div>
