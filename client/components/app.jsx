@@ -100,7 +100,7 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
-    const findCart = currentId => currentId.cartItem.Id === parseInt(cartItemId);
+    const findCart = currentId => currentId.cartItemId === parseInt(cartItemId);
     const cartIndex = this.state.cart.findIndex(findCart);
 
     fetch(`/api/cart/${cartItemId}`, {
@@ -137,6 +137,8 @@ export default class App extends React.Component {
     } else {
       carouselRender = <Carousel />;
     }
+
+    console.log(this.state.cart);
 
     return (
       <div>
