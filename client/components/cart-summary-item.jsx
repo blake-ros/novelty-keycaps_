@@ -20,7 +20,8 @@ class CartSummaryItem extends React.Component {
   }
 
   removeItemModal() {
-    console.log(this.props.removeItem);
+    console.log(this.props.item);
+    console.log(this.props.cart);
     if (this.state.remove === true) {
       return (
         <div className="position-fixed h-100 w-100 overlay d-flex">
