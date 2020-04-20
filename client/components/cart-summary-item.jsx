@@ -22,7 +22,12 @@ class CartSummaryItem extends React.Component {
   removeItemModal() {
     console.log(this.props.cart);
     console.log(this.props.cartItem.cartItemId);
-    const cartItemId = this.props.cartItem.cartItemId;
+    console.log(this.props.removeItem);
+    // const cartItemId = this.props.cartItem.cartItemId;
+    // const deleteItem = this.props.removeItem;
+
+    // onClick = { this.props.removeItem(cartItemId) }
+
     if (this.state.remove === true) {
       return (
         <div className="position-fixed h-100 w-100 overlay d-flex">
@@ -38,7 +43,7 @@ class CartSummaryItem extends React.Component {
               </div>
               <div className="d-flex justify-content-around mt-4">
                 <button className="btn btn-primary" onClick={this.hideRemoveModal}>Keep in cart</button>
-                <button className="btn btn-danger" onClick={this.props.removeItem(cartItemId)} id={this.props.cart.cartItemId}>Remove</button>
+                <button className="btn btn-danger" onClick={this.props.removeItem(this.props.cartItem.cartItemId)} id={this.props.cart.cartItemId}>Remove</button>
               </div>
             </div>
           </div>
@@ -56,7 +61,6 @@ class CartSummaryItem extends React.Component {
 
   render(props) {
     const cartItem = this.props.cartItem;
-    console.log(this.props.cartItem);
 
     return (
       <div className="card mb-3 mt-3" style={{ maxWidth: '540 px' }}>
