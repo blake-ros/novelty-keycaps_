@@ -108,8 +108,6 @@ export default class App extends React.Component {
       method: 'DELETE'
     })
       .then(response => {
-        console.log(cartItemId);
-        console.log(response);
         return response;
       })
       .then(result => {
