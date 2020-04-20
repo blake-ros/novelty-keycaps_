@@ -20,7 +20,7 @@ class CartSummaryItem extends React.Component {
   }
 
   removeItemModal() {
-    console.log(this.props.removeItem);
+    console.log(this.props.cart);
     if (this.state.remove === true) {
       return (
         <div className="position-fixed h-100 w-100 overlay d-flex">
@@ -36,7 +36,7 @@ class CartSummaryItem extends React.Component {
               </div>
               <div className="d-flex justify-content-around mt-4">
                 <button className="btn btn-primary" onClick={this.hideRemoveModal}>Keep in cart</button>
-                <button className="btn btn-danger" onClick={this.props.removeItem}>Remove</button>
+                <button className="btn btn-danger" onClick={this.props.removeItem} id={this.props.cart.cartItemId}>Remove</button>
               </div>
             </div>
           </div>
@@ -54,6 +54,7 @@ class CartSummaryItem extends React.Component {
 
   render(props) {
     const cartItem = this.props.cartItem;
+    console.log(this.props.cartItem);
 
     return (
       <div className="card mb-3 mt-3" style={{ maxWidth: '540 px' }}>
@@ -67,7 +68,7 @@ class CartSummaryItem extends React.Component {
               <h2 className="card-title">{cartItem.name}</h2>
               <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>
               <p className="card-text mt-3">{cartItem.shortDescription}</p>
-              <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2">Remove</button>
+              <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2" id={this.props.cart.cartItemId}>Remove</button>
             </div>
           </div>
         </div>
