@@ -101,10 +101,10 @@ export default class App extends React.Component {
 
   removeItem(cartItemId) {
     console.log(cartItemId);
-    // const findCart = currentId => currentId.cartItemId === parseInt(cartItemId);
-    // const cartIndex = this.state.cart.findIndex(findCart);
-    // console.log(cartIndex);
-    // console.log(this.props.cartItem.cartItemId);
+    console.log(this.state.cart);
+    function filterCart(cart) {
+      return cart.cartItemId !== cartItemId;
+    }
 
     fetch(`/api/cart/${cartItemId}`, {
       method: 'DELETE'
@@ -112,11 +112,9 @@ export default class App extends React.Component {
       .then(response => {
         return response;
       })
-      .then(result => {
-        const updateCart = this.state.cart.slice();
-        updateCart.splice(cartIndex, 1);
+      .then(data => {
         this.setState({
-          cart: updateCart
+          cart: this.state.cart.filter(filterCart)
         });
       });
   }

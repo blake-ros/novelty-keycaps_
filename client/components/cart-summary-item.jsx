@@ -10,6 +10,7 @@ class CartSummaryItem extends React.Component {
     this.removeItemModal = this.removeItemModal.bind(this);
     this.showRemoveItemModal = this.showRemoveItemModal.bind(this);
     this.hideRemoveModal = this.hideRemoveModal.bind(this);
+    this.removeFromCartConfirmation = this.removeFromCartConfirmation.bind(this);
   }
 
   showRemoveItemModal(event) {
@@ -17,6 +18,15 @@ class CartSummaryItem extends React.Component {
     this.setState({
       remove: true
     });
+  }
+
+  removeFromCartConfirmation(event) {
+    const cartItemId = event.currenTarget.id;
+    const method = this.props.removeItem;
+    this.setState({
+      remove: false
+    });
+    method(cartItemId);
   }
 
   removeItemModal() {
@@ -43,7 +53,7 @@ class CartSummaryItem extends React.Component {
               </div>
               <div className="d-flex justify-content-around mt-4">
                 <button className="btn btn-primary" onClick={this.hideRemoveModal}>Keep in cart</button>
-                <button className="btn btn-danger" onClick={this.props.removeItem(this.props.cartItem.cartItemId)} id={this.props.cart.cartItemId}>Remove</button>
+                <button className="btn btn-danger" onClick={this.props.removeFromCartConfirmation} id={this.props.cart.cartItemId}>Remove</button>
               </div>
             </div>
           </div>
