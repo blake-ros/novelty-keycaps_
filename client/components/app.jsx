@@ -100,8 +100,6 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
-    console.log(cartItemId);
-    console.log(this.state.cart);
     function filterCart(cart) {
       return cart.cartItemId !== cartItemId;
     }
@@ -120,6 +118,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.cart);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
