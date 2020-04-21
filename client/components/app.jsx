@@ -95,7 +95,7 @@ export default class App extends React.Component {
           const myCart = this.state.cart;
           this.setState({
             cart: myCart.concat(data),
-            updatedQuantity: this.state.updatedQuantity + data.quantity
+            updatedQuantity: quantity
           });
         });
     }
