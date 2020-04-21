@@ -133,7 +133,9 @@ app.post('/api/cart', (req, res, next) => {
                "p"."productId",
                "p"."image",
                "p"."name",
-               "p"."shortDescription"
+               "p"."shortDescription",
+               "c"."quantity",
+               "c"."totalPrice"
         FROM "cartItems" as "c"
         JOIN "products" as "p" USING ("productId")
         WHERE "c"."cartItemId" = $1
