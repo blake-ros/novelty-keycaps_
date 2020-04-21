@@ -56,22 +56,24 @@ export default class App extends React.Component {
 
   addToCart(product, quantity) {
     console.log(product);
+    console.log(quantity);
 
-    const newProduct = product.productId;
+    const product = product.productId;
     const cart = this.state.cart;
     const duplicateProduct = false;
+
     let duplicateQuantity;
     let newTotal;
 
-    // for (let i = 0; i < cart.length; i++) {
-    //   if (cart[i].productId === newProduct) {
-    //     duplicateProduct = true;
-    //     duplicateQuantity = cart[i].quantity + quantity;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].productId === newProduct) {
+        duplicateProduct = true;
+        duplicateQuantity = cart[i].quantity + quantity;
 
-    //     const updatedProductTotal = product.price * quantity;
-    //     newTotal = cart[i].
-    //   }
-    // }
+        const updatedProductTotal = product.price * quantity;
+        newTotal = cart[i].
+      }
+    }
 
     fetch('/api/cart', {
       method: 'POST',
