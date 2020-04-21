@@ -49,10 +49,16 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(res => res.json())
-      .then(data => this.setState({
-        cart: data
-      }))
-      .catch(err => this.setState({ message: err.message }));
+      .then(data => {
+        const totalQuantity = data.reduce((prev, cur) => {
+          return prev + cur.quantity;
+        }, 0);
+        this.setState({
+          cart: data,
+          updatedQuantity: totalQuantity
+        });
+        // .catch(err => this.setState({ message: err.message }));
+      });
   }
 
   addToCart(product, quantity) {

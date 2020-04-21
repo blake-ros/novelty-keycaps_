@@ -70,7 +70,9 @@ app.get('/api/cart', (req, res, next) => {
            "p"."productId",
            "p"."image",
            "p"."name",
-           "p"."shortDescription"
+           "p"."shortDescription",
+           "c"."quantity",
+           "c"."totalPrice"
     FROM "cartItems" AS "c"
     JOIN "products" AS "p" USING ("productId")
     WHERE "c"."cartId" = $1
@@ -123,7 +125,7 @@ app.post('/api/cart', (req, res, next) => {
           RETURNING "cartItemId"
           `;
 
-        const values = [result.cartId, productId, result.price, quantity, (quantity * result.price)];
+        const values = [result.cartId, productId, result.price, quantity, (result.quantity * result.price)];
 
         return db.query(updatedCart, values).then(result => result.rows[0].cartItemId);
       })

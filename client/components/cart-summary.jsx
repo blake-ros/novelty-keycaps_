@@ -4,7 +4,7 @@ import CartSummaryItem from './cart-summary-item.jsx';
 class CartSummary extends React.Component {
   render(props) {
     const cartArray = this.props.cart;
-    const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
+    const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
     let itemsInCart;
     let button;
     if (cartArray.length === 0) {
