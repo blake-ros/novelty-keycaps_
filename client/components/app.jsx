@@ -54,7 +54,7 @@ export default class App extends React.Component {
       .catch(err => this.setState({ message: err.message }));
   }
 
-  addToCart(product) {
+  addToCart(product, quantity) {
     fetch('/api/cart', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
