@@ -69,10 +69,6 @@ class ProductDetails extends React.Component {
     });
   }
 
-  addProductQuantity() {
-
-  }
-
   blurQuantity(event) {
     if (this.state.quantity === 0) {
       this.setState({
@@ -93,7 +89,6 @@ class ProductDetails extends React.Component {
   render(props) {
     const myProduct = this.state.product;
     const myQuantity = this.state.quantity;
-    console.log(myQuantity);
 
     if (!this.state.product) {
       return null;

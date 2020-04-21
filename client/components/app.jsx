@@ -49,53 +49,38 @@ export default class App extends React.Component {
   getCartItems() {
     fetch('/api/cart')
       .then(res => res.json())
-      .then(data => this.setState({
-        cart: data
-      }))
-      .catch(err => this.setState({ message: err.message }));
+      .then(data => {
+        const totalQuantity = data.reduce((prev, cur) => {
+          return prev + cur.quantity;
+        }, 0);
+        this.setState({
+          cart: data,
+          updatedQuantity: totalQuantity
+        });
+      });
   }
 
   addToCart(product, quantity) {
-    console.log(product);
-    console.log(quantity);
-
+    const thisQuantity = quantity;
     const duplicate = false;
 
-    // const updateQuantity = {
-    //   quantity: quantity
-    // }
+    event.preventDefault();
+    const productQuantity = { quantity: thisQuantity };
 
-    // const thisProduct = product.productId;
-    // const cart = this.state.cart;
-    // const duplicateProduct = false;
-
-    // const productWithQuantity = {...product, ...updateQuantity}
-
-    // let duplicateQuantity;
-    // let newTotal;
-
-    // for (let i = 0; i < cart.length; i++) {
-    //   if (cart[i].productId === newProduct) {
-    //     duplicateProduct = true;
-    //     duplicateQuantity = cart[i].quantity + quantity;
-
-    //     const updatedProductTotal = product.price * quantity;
-    //     newTotal = cart[i].
-    //   }
-    // }
+    const theProductWithQuantity = { ...product, ...productQuantity };
 
     if (duplicate === false) {
       fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
+        body: JSON.stringify(theProductWithQuantity)
       })
         .then(response => response.json())
         .then(data => {
           const myCart = this.state.cart;
           this.setState({
             cart: myCart.concat(data),
-            updatedQuantity: quantity
+            updatedQuantity: this.state.updatedQuantity + data.quantity
           });
         });
     }
@@ -152,7 +137,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.cart);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
