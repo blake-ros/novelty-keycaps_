@@ -15,6 +15,7 @@ export default class App extends React.Component {
       isLoading: true,
       view: { name: 'catalog', params: {} },
       cart: [],
+      updatedQuantity: '',
       showInitialModal: {
         show: true,
         displayNone: false
@@ -58,33 +59,46 @@ export default class App extends React.Component {
     console.log(product);
     console.log(quantity);
 
-    const product = product.productId;
-    const cart = this.state.cart;
-    const duplicateProduct = false;
+    const duplicate = false;
 
-    let duplicateQuantity;
-    let newTotal;
+    // const updateQuantity = {
+    //   quantity: quantity
+    // }
 
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].productId === newProduct) {
-        duplicateProduct = true;
-        duplicateQuantity = cart[i].quantity + quantity;
+    // const thisProduct = product.productId;
+    // const cart = this.state.cart;
+    // const duplicateProduct = false;
 
-        const updatedProductTotal = product.price * quantity;
-        newTotal = cart[i].
-      }
+    // const productWithQuantity = {...product, ...updateQuantity}
+
+    // let duplicateQuantity;
+    // let newTotal;
+
+    // for (let i = 0; i < cart.length; i++) {
+    //   if (cart[i].productId === newProduct) {
+    //     duplicateProduct = true;
+    //     duplicateQuantity = cart[i].quantity + quantity;
+
+    //     const updatedProductTotal = product.price * quantity;
+    //     newTotal = cart[i].
+    //   }
+    // }
+
+    if (duplicate === false) {
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
+      })
+        .then(response => response.json())
+        .then(data => {
+          const myCart = this.state.cart;
+          this.setState({
+            cart: myCart.concat(data),
+            updatedQuantity: this.state.updatedQuantity + data.quantity
+          });
+        });
     }
-
-    fetch('/api/cart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(product)
-    })
-      .then(response => response.json())
-      .then(data => {
-        const myCart = this.state.cart;
-        this.setState({ cart: myCart.concat(data) });
-      });
   }
 
   placeOrder(orderObj) {
