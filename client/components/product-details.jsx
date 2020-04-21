@@ -69,9 +69,10 @@ class ProductDetails extends React.Component {
     });
   }
 
-  addProductQuantity() {
-
-  }
+  // addProductQuantity(event) {
+  //   const addItemMethod = this.props.addToCart;
+  //   addItemMethod(this.state.product, this.state.quantity);
+  // }
 
   blurQuantity(event) {
     if (this.state.quantity === 0) {
@@ -93,7 +94,6 @@ class ProductDetails extends React.Component {
   render(props) {
     const myProduct = this.state.product;
     const myQuantity = this.state.quantity;
-    console.log(myQuantity);
 
     if (!this.state.product) {
       return null;

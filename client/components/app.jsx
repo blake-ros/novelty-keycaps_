@@ -59,17 +59,23 @@ export default class App extends React.Component {
     console.log(product);
     console.log(quantity);
 
+    const thisQuantity = quantity;
     const duplicate = false;
 
-    // const updateQuantity = {
+    event.preventDefault();
+    const productQuantity = { quantity: thisQuantity };
+
+    const theProductWithQuantity = { ...product, ...productQuantity };
+
+    // const newQuantity = {
     //   quantity: quantity
-    // }
+    // };
 
     // const thisProduct = product.productId;
     // const cart = this.state.cart;
     // const duplicateProduct = false;
 
-    // const productWithQuantity = {...product, ...updateQuantity}
+    // const productWithQuantity = { ...product, ...newQuantity };
 
     // let duplicateQuantity;
     // let newTotal;
@@ -88,14 +94,14 @@ export default class App extends React.Component {
       fetch('/api/cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
+        body: JSON.stringify(theProductWithQuantity)
       })
         .then(response => response.json())
         .then(data => {
           const myCart = this.state.cart;
           this.setState({
             cart: myCart.concat(data),
-            updatedQuantity: quantity
+            updatedQuantity: this.state.updatedQuantity + data.quantity
           });
         });
     }
