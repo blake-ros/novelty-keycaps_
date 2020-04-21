@@ -93,6 +93,7 @@ class ProductDetails extends React.Component {
   render(props) {
     const myProduct = this.state.product;
     const myQuantity = this.state.quantity;
+    console.log(myQuantity);
 
     if (!this.state.product) {
       return null;

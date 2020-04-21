@@ -117,12 +117,12 @@ app.post('/api/cart', (req, res, next) => {
       .then(result => {
         req.session.cartId = result.cartId;
         const updatedCart = `
-          INSERT INTO "cartItems" ("cartId", "productId", "price")
-          VALUES ($1, $2, $3)
+          INSERT INTO "cartItems" ("cartId", "productId", "price", "quantity", "totalPrice")
+          VALUES ($1, $2, $3, $4, $5)
           RETURNING "cartItemId"
           `;
 
-        const values = [result.cartId, productId, result.price];
+        const values = [result.cartId, productId, result.price, result.quantity, (result.quantity * result.price)];
 
         return db.query(updatedCart, values).then(result => result.rows[0].cartItemId);
       })
@@ -133,7 +133,9 @@ app.post('/api/cart', (req, res, next) => {
                "p"."productId",
                "p"."image",
                "p"."name",
-               "p"."shortDescription"
+               "p"."shortDescription",
+               "c"."quantity",
+               "c"."totalPrice"
         FROM "cartItems" as "c"
         JOIN "products" as "p" USING ("productId")
         WHERE "c"."cartItemId" = $1

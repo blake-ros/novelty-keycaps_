@@ -15,6 +15,7 @@ export default class App extends React.Component {
       isLoading: true,
       view: { name: 'catalog', params: {} },
       cart: [],
+      updatedQuantity: '',
       showInitialModal: {
         show: true,
         displayNone: false
@@ -56,12 +57,22 @@ export default class App extends React.Component {
 
   addToCart(product, quantity) {
     console.log(product);
+    console.log(quantity);
 
-    const newProduct = product.productId;
-    const cart = this.state.cart;
-    const duplicateProduct = false;
-    let duplicateQuantity;
-    let newTotal;
+    const duplicate = false;
+
+    // const updateQuantity = {
+    //   quantity: quantity
+    // }
+
+    // const thisProduct = product.productId;
+    // const cart = this.state.cart;
+    // const duplicateProduct = false;
+
+    // const productWithQuantity = {...product, ...updateQuantity}
+
+    // let duplicateQuantity;
+    // let newTotal;
 
     // for (let i = 0; i < cart.length; i++) {
     //   if (cart[i].productId === newProduct) {
@@ -73,16 +84,21 @@ export default class App extends React.Component {
     //   }
     // }
 
-    fetch('/api/cart', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(product)
-    })
-      .then(response => response.json())
-      .then(data => {
-        const myCart = this.state.cart;
-        this.setState({ cart: myCart.concat(data) });
-      });
+    if (duplicate === false) {
+      fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
+      })
+        .then(response => response.json())
+        .then(data => {
+          const myCart = this.state.cart;
+          this.setState({
+            cart: myCart.concat(data),
+            updatedQuantity: quantity
+          });
+        });
+    }
   }
 
   placeOrder(orderObj) {

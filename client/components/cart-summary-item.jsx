@@ -21,12 +21,8 @@ class CartSummaryItem extends React.Component {
   }
 
   removeFromCartConfirmation(event) {
-    console.log(this.props.cartItem.cartItemId);
-    console.log(this.props.id);
     const cartItemId = this.props.cartItem.cartItemId;
-    console.log(cartItemId);
     const method = this.props.removeItem;
-    console.log(method);
     this.setState({
       remove: false
     });
