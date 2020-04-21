@@ -69,6 +69,10 @@ class ProductDetails extends React.Component {
     });
   }
 
+  addProductQuantity() {
+
+  }
+
   blurQuantity(event) {
     if (this.state.quantity === 0) {
       this.setState({
@@ -88,6 +92,8 @@ class ProductDetails extends React.Component {
 
   render(props) {
     const myProduct = this.state.product;
+    const myQuantity = this.state.quantity;
+    console.log(this.state.quantity);
 
     if (!this.state.product) {
       return null;
@@ -114,7 +120,7 @@ class ProductDetails extends React.Component {
                   </div>
                 </div>
                 <button className="btn btn-primary pl-3 pr-3 pt-2 pb-2 mt-3" onClick={() => {
-                  this.props.addToCart(myProduct, '+');
+                  this.props.addToCart(myProduct, myQuantity);
                   this.toggleModal();
                 }}>Add To Cart</button>
               </div>
