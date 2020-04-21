@@ -30,14 +30,7 @@ class CartSummaryItem extends React.Component {
   }
 
   removeItemModal() {
-    // console.log(this.props.cart);
     const cartItem = this.props.cartItem;
-
-    // console.log(this.props.removeItem);
-    // const cartItemId = this.props.cartItem.cartItemId;
-    // const deleteItem = this.props.removeItem;
-
-    // onClick = { this.props.removeItem(cartItemId) }
 
     if (this.state.remove === true) {
       return (
@@ -45,12 +38,11 @@ class CartSummaryItem extends React.Component {
           <div className="m-auto p-3">
             <div className="bg-white rounded p-3 modal-message">
               <div className="mt-2">
-                <h3>Remove this Item?</h3>
+                <h3 className="text-center">Remove this Item?</h3>
               </div>
               <div className="mt-3">
-                <h5>Do you want to remove this from your cart?</h5>
                 <h5>Item: {cartItem.name}</h5>
-                <h5>Qty: </h5>
+                <h5>Qty: {cartItem.quantity}</h5>
               </div>
               <div className="d-flex justify-content-around mt-4">
                 <button className="btn btn-primary" onClick={this.hideRemoveModal}>Keep in cart</button>
@@ -73,6 +65,13 @@ class CartSummaryItem extends React.Component {
   render(props) {
     const cartItem = this.props.cartItem;
 
+    let totalPriceRender;
+    if (cartItem.quantity > 1) {
+      totalPriceRender = <span className="card-text text-secondary mb-5">${(cartItem.totalPrice * 0.01).toFixed(2)}</span>;
+    } else {
+      totalPriceRender = <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>;
+    }
+
     return (
       <div className="card mb-3 mt-3" style={{ maxWidth: '540 px' }}>
         {this.removeItemModal()}
@@ -83,7 +82,8 @@ class CartSummaryItem extends React.Component {
           <div className="col-md-8">
             <div className="card-body">
               <h2 className="card-title">{cartItem.name}</h2>
-              <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>
+              {totalPriceRender}
+              <p className="cart-text text-secondary mt-2">Quantity: {cartItem.quantity}</p>
               <p className="card-text mt-3">{cartItem.shortDescription}</p>
               <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2" id={cartItem.cartItemId}>Remove</button>
             </div>

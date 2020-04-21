@@ -69,11 +69,6 @@ class ProductDetails extends React.Component {
     });
   }
 
-  // addProductQuantity(event) {
-  //   const addItemMethod = this.props.addToCart;
-  //   addItemMethod(this.state.product, this.state.quantity);
-  // }
-
   blurQuantity(event) {
     if (this.state.quantity === 0) {
       this.setState({

@@ -57,14 +57,10 @@ export default class App extends React.Component {
           cart: data,
           updatedQuantity: totalQuantity
         });
-        // .catch(err => this.setState({ message: err.message }));
       });
   }
 
   addToCart(product, quantity) {
-    console.log(product);
-    console.log(quantity);
-
     const thisQuantity = quantity;
     const duplicate = false;
 
@@ -72,29 +68,6 @@ export default class App extends React.Component {
     const productQuantity = { quantity: thisQuantity };
 
     const theProductWithQuantity = { ...product, ...productQuantity };
-
-    // const newQuantity = {
-    //   quantity: quantity
-    // };
-
-    // const thisProduct = product.productId;
-    // const cart = this.state.cart;
-    // const duplicateProduct = false;
-
-    // const productWithQuantity = { ...product, ...newQuantity };
-
-    // let duplicateQuantity;
-    // let newTotal;
-
-    // for (let i = 0; i < cart.length; i++) {
-    //   if (cart[i].productId === newProduct) {
-    //     duplicateProduct = true;
-    //     duplicateQuantity = cart[i].quantity + quantity;
-
-    //     const updatedProductTotal = product.price * quantity;
-    //     newTotal = cart[i].
-    //   }
-    // }
 
     if (duplicate === false) {
       fetch('/api/cart', {
@@ -164,7 +137,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.cart);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {

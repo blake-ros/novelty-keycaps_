@@ -125,7 +125,7 @@ app.post('/api/cart', (req, res, next) => {
           RETURNING "cartItemId"
           `;
 
-        const values = [result.cartId, productId, result.price, quantity, (result.quantity * result.price)];
+        const values = [result.cartId, productId, result.price, quantity, (quantity * result.price)];
 
         return db.query(updatedCart, values).then(result => result.rows[0].cartItemId);
       })
