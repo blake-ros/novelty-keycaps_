@@ -100,28 +100,25 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
-    console.log(cartItemId);
-    const findCart = currentId => currentId.cartItemId === parseInt(cartItemId);
-    const cartIndex = this.state.cart.findIndex(findCart);
+    function filterCart(cart) {
+      return cart.cartItemId !== cartItemId;
+    }
 
     fetch(`/api/cart/${cartItemId}`, {
       method: 'DELETE'
     })
       .then(response => {
-        console.log(cartItemId);
-        console.log(response);
         return response;
       })
-      .then(result => {
-        const updateCart = this.state.cart.slice();
-        updateCart.splice(cartIndex, 1);
+      .then(data => {
         this.setState({
-          cart: updateCart
+          cart: this.state.cart.filter(filterCart)
         });
       });
   }
 
   render() {
+    console.log(this.state.cart);
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {

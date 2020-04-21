@@ -152,21 +152,17 @@ app.post('/api/cart', (req, res, next) => {
 
 app.delete('/api/cart/:cartItemId', (req, res, next) => {
   const cartItemId = req.params.cartItemId;
-  const cartId = req.session.cartId;
 
   const sql = `
     DELETE FROM "cartItems"
     WHERE "cartItemId" = $1
-    AND "cartId" = $2
     RETURNING *
     `;
 
-  db.query(sql, [cartItemId, cartId])
+  db.query(sql, [cartItemId])
     .then(result => {
       if (!result.rows[0]) {
         res.status(404).json(`Cannot find Item with ID of ${cartItemId}`);
-      } else if (!cartId) {
-        res.status(404).json(`Cannot find the Cart with the ID of ${cartId}`);
       } else {
         res.status(204).json(`Item with cart item ID ${cartItemId} has been removed`);
       }
