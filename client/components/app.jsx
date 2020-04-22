@@ -62,12 +62,23 @@ export default class App extends React.Component {
 
   addToCart(product, quantity) {
     const thisQuantity = quantity;
-    const duplicate = false;
+    const thisProductId = product.productId;
+    const thisTotalPrice = product.totalPrice;
+    let duplicate = false;
+    const cart = this.state.cart;
 
     event.preventDefault();
     const productQuantity = { quantity: thisQuantity };
 
     const theProductWithQuantity = { ...product, ...productQuantity };
+
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].productId === thisProductId) {
+        duplicate = true;
+        const newQuantity = cart[i].quantity + thisQuantity;
+        const newTotal = cart[i].totalPrice +
+      }
+    }
 
     if (duplicate === false) {
       fetch('/api/cart', {
