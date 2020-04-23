@@ -155,6 +155,30 @@ app.post('/api/cart', (req, res, next) => {
 
 });
 
+app.put('/api/cart', (req, res, next) => {
+  const cartId = req.session.cartId;
+  const productId = req.body.productId;
+  const quantity = req.body.quantity;
+  const totalPrice = req.body.totalPrice;
+
+  const sql = `
+    UPDATE "cartItems"
+    SET "quantity" = $1,
+        "totalPrice" = $2
+    WHERE "cartId" = $3
+    AND "productId" = $4
+    RETURNING *
+    `;
+
+  const values = [quantity, totalPrice, cartId, productId];
+
+  db.query(sql, values)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 app.delete('/api/cart/:cartItemId', (req, res, next) => {
   const cartItemId = req.params.cartItemId;
 

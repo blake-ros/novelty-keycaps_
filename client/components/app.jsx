@@ -62,12 +62,43 @@ export default class App extends React.Component {
 
   addToCart(product, quantity) {
     const thisQuantity = quantity;
-    const duplicate = false;
+    const thisProductId = product.productId;
+    let duplicate = false;
+    const cart = this.state.cart;
 
     event.preventDefault();
     const productQuantity = { quantity: thisQuantity };
 
     const theProductWithQuantity = { ...product, ...productQuantity };
+
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].productId === thisProductId) {
+        duplicate = true;
+        const newQuantity = cart[i].quantity + thisQuantity;
+        const newTotal = cart[i].totalPrice + (product.price * quantity);
+
+        const updateProduct = {
+          productId: thisProductId,
+          quantity: newQuantity,
+          totalPrice: newTotal
+        };
+
+        fetch('/api/cart', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updateProduct)
+        })
+          .then(response => {
+            return response.json();
+          })
+          .then(data => {
+            cart[i] = { ...cart[i], ...data };
+            this.setState({
+              cart
+            });
+          });
+      }
+    }
 
     if (duplicate === false) {
       fetch('/api/cart', {
@@ -119,6 +150,7 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
+
     function filterCart(cart) {
       return cart.cartItemId !== cartItemId;
     }
@@ -137,6 +169,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    const cart = this.state.cart;
+    const cartQuantity = cart.reduce((prev, cur) => {
+      return prev + cur.quantity;
+    }, 0);
+
     const myState = this.state.view;
     let conditionalRender;
     if (myState.name === 'details') {
@@ -158,7 +195,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
+        <Header cartItemCount={cartQuantity} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
         {carouselRender}
         {conditionalRender}
         <Sponsors />
