@@ -92,9 +92,9 @@ export default class App extends React.Component {
             return response.json();
           })
           .then(data => {
+            cart[i] = { ...cart[i], ...data };
             this.setState({
-              cart,
-              updatedQuantity: this.state.updatedQuantity + newQuantity
+              cart
             });
           });
       }
@@ -150,6 +150,7 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
+
     function filterCart(cart) {
       return cart.cartItemId !== cartItemId;
     }
@@ -168,7 +169,10 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.updatedQuantity);
+    const cart = this.state.cart;
+    const cartQuantity = cart.reduce((prev, cur) => {
+      return prev + cur.quantity;
+    }, 0);
 
     const myState = this.state.view;
     let conditionalRender;
@@ -191,7 +195,7 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <Header cartItemCount={this.state.cart.length} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
+        <Header cartItemCount={cartQuantity} onRender={this.setView} showInitialModal={this.state.showInitialModal} toggleInitialModal={this.toggleInitialModal} />
         {carouselRender}
         {conditionalRender}
         <Sponsors />

@@ -169,6 +169,14 @@ app.put('/api/cart', (req, res, next) => {
     AND "productId" = $4
     RETURNING *
     `;
+
+  const values = [quantity, totalPrice, cartId, productId];
+
+  db.query(sql, values)
+    .then(result => {
+      res.status(201).json(result.rows[0]);
+    })
+    .catch(err => next(err));
 });
 
 app.delete('/api/cart/:cartItemId', (req, res, next) => {
