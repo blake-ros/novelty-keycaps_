@@ -15,7 +15,6 @@ export default class App extends React.Component {
       isLoading: true,
       view: { name: 'catalog', params: {} },
       cart: [],
-      updatedQuantity: '',
       showInitialModal: {
         show: true,
         displayNone: false
@@ -50,12 +49,8 @@ export default class App extends React.Component {
     fetch('/api/cart')
       .then(res => res.json())
       .then(data => {
-        const totalQuantity = data.reduce((prev, cur) => {
-          return prev + cur.quantity;
-        }, 0);
         this.setState({
-          cart: data,
-          updatedQuantity: totalQuantity
+          cart: data
         });
       });
   }
@@ -110,8 +105,7 @@ export default class App extends React.Component {
         .then(data => {
           const myCart = this.state.cart;
           this.setState({
-            cart: myCart.concat(data),
-            updatedQuantity: this.state.updatedQuantity + data.quantity
+            cart: myCart.concat(data)
           });
         });
     }
