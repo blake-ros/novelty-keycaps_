@@ -175,7 +175,7 @@ export default class App extends React.Component {
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} toggleInitialModal={this.toggleInitialModal} showInitialModal={this.state.showInitialModal} />;
     } else if (myState.name === 'cart') {
-      conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} removeItem={this.removeItem} />;
+      conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} removeItem={this.removeItem} addtoCart={this.props.addToCart} />;
     } else if (myState.name === 'checkout') {
       conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
     }
