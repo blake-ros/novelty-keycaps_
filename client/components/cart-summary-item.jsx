@@ -15,6 +15,7 @@ class CartSummaryItem extends React.Component {
     this.incrementCartItem = this.decrementCartItem.bind(this);
     this.quantityCartChange = this.quantityCartChange.bind(this);
     this.blurCartQuantity = this.blurCartQuantity.bind(this);
+    this.updateCart = this.updateCart.bind(this);
   }
 
   showRemoveItemModal(event) {
@@ -98,6 +99,62 @@ class CartSummaryItem extends React.Component {
     }
   }
 
+  updateCart(productId, quantity) {
+    fetch('/api/cart/', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ productId, quantity })
+    })
+      .then(res => res.json())
+      .then(data => {
+        const newCart = [...this.state.cart];
+        const index = newCart.findIndex(cartItem => cartItem.productId === data.productId);
+        newCart[index].quantity = data.quantity;
+        this.setState({ cart: newCart });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
+    // const thisQuantity = quantity;
+    // const thisProductId = product.productId;
+    // const cart = this.state.cart;
+
+    // event.preventDefault();
+    // const productQuantity = { quantity: thisQuantity };
+
+    // const theProductWithQuantity = { ...product, ...productQuantity };
+
+    // for (let i = 0; i < cart.length; i++) {
+    //   if (cart[i].productId === thisProductId) {
+    //     duplicate = true;
+    //     const newQuantity = cart[i].quantity + thisQuantity;
+    //     const newTotal = cart[i].totalPrice + (product.price * quantity);
+
+    //     const updateProduct = {
+    //       productId: thisProductId,
+    //       quantity: newQuantity,
+    //       totalPrice: newTotal
+    //     };
+
+    //     fetch('/api/cart', {
+    //       method: 'PUT',
+    //       headers: { 'Content-Type': 'application/json' },
+    //       body: JSON.stringify(updateProduct)
+    //     })
+    //       .then(response => {
+    //         return response.json();
+    //       })
+    //       .then(data => {
+    //         cart[i] = { ...cart[i], ...data };
+    //         this.setState({
+    //           cart
+    //         });
+    //       });
+    //   }
+    // }
+  }
+
   render(props) {
     const cartItem = this.props.cartItem;
     console.log(this.props.cartItem.productId);
@@ -121,6 +178,15 @@ class CartSummaryItem extends React.Component {
               <h2 className="card-title">{cartItem.name}</h2>
               {totalPriceRender}
               <p className="cart-text text-secondary mt-2">Quantity: {cartItem.quantity}</p>
+              <div className="d-flex justify-content-start">
+                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementCartItem}>
+                  <i className="fas fa-minus"></i>
+                </div>
+                <input type="number" className="text-center justify-content-center inputBox" onChange={this.quantityCartChange} value={cartItem.quantity} onBlur={this.blurQuantity} readOnly />
+                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementCartItem}>
+                  <i className="fas fa-plus"></i>
+                </div>
+              </div>
               <p className="card-text mt-3">{cartItem.shortDescription}</p>
               <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2" id={cartItem.cartItemId}>Remove</button>
             </div>
