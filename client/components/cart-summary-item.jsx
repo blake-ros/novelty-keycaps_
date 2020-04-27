@@ -4,7 +4,8 @@ class CartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: true,
+      quantity: this.props.cartItem ? this.props.cartItem.quantity : '',
+      updateQuantity: false,
       remove: false
     };
     this.removeItemModal = this.removeItemModal.bind(this);
@@ -68,20 +69,41 @@ class CartSummaryItem extends React.Component {
   }
 
   decrementCartItem(event) {
-    let quantity = this.state.quantity;
-    if (quantity === 1) {
-      return null;
-    } else {
+
+    if (this.state.quantity > 1) {
+      const cartItemId = event.currentTarget.id;
+      let theQuantity = this.state.quantity;
+      const newQuantity = {
+        quantity: this.state.quantity - 1,
+        newTotalPrice: (this.state.quantity - 1) + this.props.cartItem.price
+      };
       this.setState({
-        quantity: --quantity
+        quantity: --theQuantity,
+        update: true
+      });
+      fetch(`/api/cart/${cartItemId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newQuantity)
       });
     }
   }
 
   incrementCartItem(event) {
-    let quantity = this.state.quantity;
+    const cartItemId = event.currentTarget.id;
+    let theQuantity = this.state.quantity;
+    const newQuantity = {
+      quantity: this.state.quantity + 1,
+      newTotalPrice: (this.state.quantity + 1) * this.props.cartItem.price
+    };
     this.setState({
-      quantity: ++quantity
+      quantity: ++theQuantity,
+      update: true
+    });
+    fetch(`/api/cart/${cartItemId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newQuantity)
     });
   }
 
@@ -157,7 +179,7 @@ class CartSummaryItem extends React.Component {
 
   render(props) {
     const cartItem = this.props.cartItem;
-    console.log(this.props.cartItem.productId);
+    console.log(this.state.quantity);
 
     let totalPriceRender;
     if (cartItem.quantity > 1) {
