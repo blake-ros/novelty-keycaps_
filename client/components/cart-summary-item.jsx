@@ -11,6 +11,10 @@ class CartSummaryItem extends React.Component {
     this.showRemoveItemModal = this.showRemoveItemModal.bind(this);
     this.hideRemoveModal = this.hideRemoveModal.bind(this);
     this.removeFromCartConfirmation = this.removeFromCartConfirmation.bind(this);
+    this.decrementCartItem = this.decrementCartItem.bind(this);
+    this.incrementCartItem = this.decrementCartItem.bind(this);
+    this.quantityCartChange = this.quantityCartChange.bind(this);
+    this.blurCartQuantity = this.blurCartQuantity.bind(this);
   }
 
   showRemoveItemModal(event) {
@@ -62,8 +66,41 @@ class CartSummaryItem extends React.Component {
     });
   }
 
+  decrementCartItem(event) {
+    let quantity = this.state.quantity;
+    if (quantity === 1) {
+      return null;
+    } else {
+      this.setState({
+        quantity: --quantity
+      });
+    }
+  }
+
+  incrementCartItem(event) {
+    let quantity = this.state.quantity;
+    this.setState({
+      quantity: ++quantity
+    });
+  }
+
+  quantityCartChange(event) {
+    this.setState({
+      quantity: parseInt(event.currentTarget.value)
+    });
+  }
+
+  blurCartQuantity(event) {
+    if (this.state.quantity === 0) {
+      this.setState({
+        quantity: 1
+      });
+    }
+  }
+
   render(props) {
     const cartItem = this.props.cartItem;
+    console.log(this.props.cartItem.productId);
 
     let totalPriceRender;
     if (cartItem.quantity > 1) {
