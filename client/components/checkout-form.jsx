@@ -52,7 +52,7 @@ class CheckoutForm extends React.Component {
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group" >
-            <label>Name</label>
+            <label>Full Name</label>
             <input type="name" className="form-control" onChange={this.handleNameChange}></input>
             <label>Credit Card</label>
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
