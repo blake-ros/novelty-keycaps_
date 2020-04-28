@@ -52,17 +52,24 @@ class CheckoutForm extends React.Component {
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group" >
+            <h2 className="text-center">Billing/Shipping</h2>
             <div className="row">
-              <div className="col">
+              <div className="col-6">
                 <label>Full Name</label>
                 <input type="name" className="form-control" onChange={this.handleNameChange}></input>
+              </div>
+            </div>
+            <div className="row mt-3">
+              <div className="col">
+                <label>Email</label>
+                <input type="text" className="form-control"></input>
               </div>
               <div className="col">
                 <label>Phone Number</label>
                 <input type="number" className="form-control"></input>
               </div>
             </div>
-            <div className="row">
+            <div className="row mt-3">
               <div className="col">
                 <label>Address 1</label>
                 <input type="name" className="form-control"></input>
@@ -72,7 +79,7 @@ class CheckoutForm extends React.Component {
                 <input type="name" className="form-control"></input>
               </div>
             </div>
-            <div className="row">
+            <div className="row mt-3">
               <div className="col-6">
                 <label>City</label>
                 <input type="name" className="form-control"></input>
@@ -138,10 +145,52 @@ class CheckoutForm extends React.Component {
                 <input type="name" className="form-control"></input>
               </div>
             </div>
-            <label>Credit Card</label>
-            <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
-            <label>Shipping Address</label>
-            <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
+            <h2 className="text-center mt-3">Payment Details</h2>
+            <div className="row mt-3">
+              <div className="col-6">
+                <label>Credit Card</label>
+                <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
+              </div>
+              <div className="col-2">
+                <label>Month</label>
+                <select name="month" className="form-control">
+                  <option defaultValue hidden></option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+              </div>
+              <div className="col-2">
+                <label>Year</label>
+                <select name="year" className="form-control">
+                  <option defaultValue hidden></option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                  <option value="2030">2030</option>
+                </select>
+              </div>
+              <div className="col-2">
+                <label>CVV</label>
+                <input type="text" className="form-control"></input>
+              </div>
+            </div>
             <div className="for-check ml-3 mt-3">
               <input type="checkbox" className="form-check-input" id="check"></input>
               <label className="form-check-label" htmlFor="check"><b>I understand to not use my personal information at checkout</b></label>
