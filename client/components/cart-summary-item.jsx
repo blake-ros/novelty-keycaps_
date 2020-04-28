@@ -4,7 +4,8 @@ class CartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: true,
+      quantity: this.props.cartItem ? this.props.cartItem.quantity : '',
+      updateQuantity: false,
       remove: false
     };
     this.removeItemModal = this.removeItemModal.bind(this);
@@ -12,10 +13,8 @@ class CartSummaryItem extends React.Component {
     this.hideRemoveModal = this.hideRemoveModal.bind(this);
     this.removeFromCartConfirmation = this.removeFromCartConfirmation.bind(this);
     this.decrementCartItem = this.decrementCartItem.bind(this);
-    this.incrementCartItem = this.decrementCartItem.bind(this);
-    this.quantityCartChange = this.quantityCartChange.bind(this);
+    this.incrementCartItem = this.incrementCartItem.bind(this);
     this.blurCartQuantity = this.blurCartQuantity.bind(this);
-    this.updateCart = this.updateCart.bind(this);
   }
 
   showRemoveItemModal(event) {
@@ -68,103 +67,65 @@ class CartSummaryItem extends React.Component {
   }
 
   decrementCartItem(event) {
-    let quantity = this.state.quantity;
-    if (quantity === 1) {
-      return null;
-    } else {
-      this.setState({
-        quantity: --quantity
-      });
-    }
+    event.preventDefault();
+    const cartItemId = event.currentTarget.id;
+    let theQuantity = this.state.quantity;
+    const newQuantity = {
+      quantity: this.state.quantity - 1,
+      newTotalPrice: (this.state.quantity - 1) * this.props.cartItem.price
+    };
+    this.setState({
+      cartItemQuantity: --theQuantity,
+      update: true
+    });
+    fetch(`/api/cart/${cartItemId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newQuantity)
+    });
   }
 
   incrementCartItem(event) {
-    let quantity = this.state.quantity;
+    event.preventDefault();
+    const cartItemId = event.currentTarget.id;
+    let theQuantity = this.state.quantity;
+    const newQuantity = {
+      quantity: this.state.quantity + 1,
+      newTotalPrice: (this.state.quantity + 1) * this.props.cartItem.price
+    };
     this.setState({
-      quantity: ++quantity
+      quantity: ++theQuantity,
+      update: true
+    });
+    fetch(`/api/cart/${cartItemId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newQuantity)
     });
   }
 
-  quantityCartChange(event) {
-    this.setState({
-      quantity: parseInt(event.currentTarget.value)
-    });
-  }
-
-  blurCartQuantity(event) {
-    if (this.state.quantity === 0) {
+  componentDidUpdate() {
+    if (this.state.update === true) {
       this.setState({
-        quantity: 1
+        update: false
       });
+      const getCart = this.props.getCartItems;
+      getCart();
     }
   }
 
-  updateCart(productId, quantity) {
-    fetch('/api/cart/', {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ productId, quantity })
-    })
-      .then(res => res.json())
-      .then(data => {
-        const newCart = [...this.state.cart];
-        const index = newCart.findIndex(cartItem => cartItem.productId === data.productId);
-        newCart[index].quantity = data.quantity;
-        this.setState({ cart: newCart });
-      })
-      .catch(err => {
-        console.error(err);
+  blurCartQuantity(event) {
+    if (this.state.cartItemQuantity === 0) {
+      this.setState({
+        cartItemQuantity: 1
       });
-
-    // const thisQuantity = quantity;
-    // const thisProductId = product.productId;
-    // const cart = this.state.cart;
-
-    // event.preventDefault();
-    // const productQuantity = { quantity: thisQuantity };
-
-    // const theProductWithQuantity = { ...product, ...productQuantity };
-
-    // for (let i = 0; i < cart.length; i++) {
-    //   if (cart[i].productId === thisProductId) {
-    //     duplicate = true;
-    //     const newQuantity = cart[i].quantity + thisQuantity;
-    //     const newTotal = cart[i].totalPrice + (product.price * quantity);
-
-    //     const updateProduct = {
-    //       productId: thisProductId,
-    //       quantity: newQuantity,
-    //       totalPrice: newTotal
-    //     };
-
-    //     fetch('/api/cart', {
-    //       method: 'PUT',
-    //       headers: { 'Content-Type': 'application/json' },
-    //       body: JSON.stringify(updateProduct)
-    //     })
-    //       .then(response => {
-    //         return response.json();
-    //       })
-    //       .then(data => {
-    //         cart[i] = { ...cart[i], ...data };
-    //         this.setState({
-    //           cart
-    //         });
-    //       });
-    //   }
-    // }
+    }
   }
 
   render(props) {
     const cartItem = this.props.cartItem;
-    console.log(this.props.cartItem.productId);
 
-    let totalPriceRender;
-    if (cartItem.quantity > 1) {
-      totalPriceRender = <span className="card-text text-secondary mb-5">${(cartItem.totalPrice * 0.01).toFixed(2)}</span>;
-    } else {
-      totalPriceRender = <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>;
-    }
+    const totalPriceRender = <span className="card-text text-secondary mb-5">${(cartItem.price * 0.01).toFixed(2)}</span>;
 
     return (
       <div className="card mb-3 mt-3" style={{ maxWidth: '540 px' }}>
@@ -179,11 +140,11 @@ class CartSummaryItem extends React.Component {
               {totalPriceRender}
               <p className="cart-text text-secondary mt-2">Quantity: {cartItem.quantity}</p>
               <div className="d-flex justify-content-start">
-                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementCartItem}>
+                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementCartItem} id={this.props.cartItem.cartItemId}>
                   <i className="fas fa-minus"></i>
                 </div>
-                <input type="number" className="text-center justify-content-center inputBox" onChange={this.quantityCartChange} value={cartItem.quantity} onBlur={this.blurQuantity} readOnly />
-                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementCartItem}>
+                <input type="number" className="text-center justify-content-center inputBox" value={cartItem.quantity} onBlur={this.blurQuantity} readOnly />
+                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementCartItem} id={this.props.cartItem.cartItemId}>
                   <i className="fas fa-plus"></i>
                 </div>
               </div>

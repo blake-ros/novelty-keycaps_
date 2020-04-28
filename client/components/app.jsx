@@ -165,6 +165,7 @@ export default class App extends React.Component {
   render() {
     console.log(this.state.view);
     const cart = this.state.cart;
+    console.log(this.state.cart);
     const cartQuantity = cart.reduce((prev, cur) => {
       return prev + cur.quantity;
     }, 0);
@@ -176,7 +177,7 @@ export default class App extends React.Component {
     } else if (myState.name === 'catalog') {
       conditionalRender = <ProductList onRender={this.setView} toggleInitialModal={this.toggleInitialModal} showInitialModal={this.state.showInitialModal} />;
     } else if (myState.name === 'cart') {
-      conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} removeItem={this.removeItem} addtoCart={this.props.addToCart} />;
+      conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} getCartItems={this.getCartItems} removeItem={this.removeItem} addtoCart={this.props.addToCart} />;
     } else if (myState.name === 'checkout') {
       conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
     }
