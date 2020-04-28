@@ -47,13 +47,21 @@ class CheckoutForm extends React.Component {
       button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
     }
     return (
-      <div className="container-fluid">
+      <div className="container w-50">
         <h1>Checkout</h1>
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group" >
-            <label>Full Name</label>
-            <input type="name" className="form-control" onChange={this.handleNameChange}></input>
+            <div className="row">
+              <div className="col">
+                <label>Full Name</label>
+                <input type="name" className="form-control" onChange={this.handleNameChange}></input>
+              </div>
+              <div className="col">
+                <label>Phone Number</label>
+                <input type="number" className="form-control"></input>
+              </div>
+            </div>
             <label>Credit Card</label>
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
             <label>Shipping Address</label>
