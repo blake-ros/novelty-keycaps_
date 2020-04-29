@@ -56,23 +56,27 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-6">
                 <label>Full Name</label>
-                <input type="name" className="form-control" onChange={this.handleNameChange}></input>
+                <input type="name" className="form-control is-invalid" onChange={this.handleNameChange}></input>
+                <small className="invalid-feedback">Name needs to be more than 5 characters</small>
               </div>
             </div>
             <div className="row mt-3">
               <div className="col">
                 <label>Email</label>
-                <input type="text" className="form-control"></input>
+                <input type="text" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Missing or invalid email address</small>
               </div>
               <div className="col">
                 <label>Phone Number</label>
-                <input type="number" className="form-control"></input>
+                <input type="number" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Missing or invalid phone number</small>
               </div>
             </div>
             <div className="row mt-3">
               <div className="col">
                 <label>Address 1</label>
-                <input type="name" className="form-control"></input>
+                <input type="name" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Minimum of three characters</small>
               </div>
               <div className="col">
                 <label>Address 2</label>
@@ -82,11 +86,12 @@ class CheckoutForm extends React.Component {
             <div className="row mt-3">
               <div className="col-6">
                 <label>City</label>
-                <input type="name" className="form-control"></input>
+                <input type="name" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Missing city name</small>
               </div>
               <div className="col-3">
                 <label>State</label>
-                <select className="form-control" name="state">
+                <select className="form-control is-invalid" name="state">
                   <option defaultValue hidden></option>
                   <option value="AL">Alabama</option>
                   <option value="AK">Alaska</option>
@@ -139,21 +144,24 @@ class CheckoutForm extends React.Component {
                   <option value="WI">Wisconsin</option>
                   <option value="WY">Wyoming</option>
                 </select>
+                <small className="invalid-feedback">Select a state</small>
               </div>
               <div className="col-3">
                 <label>Zip</label>
-                <input type="name" className="form-control"></input>
+                <input type="name" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Missing or invalid zipcode</small>
               </div>
             </div>
             <h2 className="text-center mt-3">Payment Details</h2>
             <div className="row mt-3">
               <div className="col-6">
                 <label>Credit Card</label>
-                <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
+                <input type="credit-card" className="form-control is-invalid" onChange={this.handleCreditCard}></input>
+                <small className="invalid-feedback">Missing or invalid credit card number</small>
               </div>
               <div className="col-2">
                 <label>Month</label>
-                <select name="month" className="form-control">
+                <select name="month" className="form-control is-invalid">
                   <option defaultValue hidden></option>
                   <option value="01">01</option>
                   <option value="02">02</option>
@@ -168,10 +176,11 @@ class CheckoutForm extends React.Component {
                   <option value="11">11</option>
                   <option value="12">12</option>
                 </select>
+                <small className="invalid-feedback">Select a month</small>
               </div>
               <div className="col-2">
                 <label>Year</label>
-                <select name="year" className="form-control">
+                <select name="year" className="form-control is-invalid">
                   <option defaultValue hidden></option>
                   <option value="2020">2020</option>
                   <option value="2021">2021</option>
@@ -185,10 +194,12 @@ class CheckoutForm extends React.Component {
                   <option value="2029">2029</option>
                   <option value="2030">2030</option>
                 </select>
+                <small className="invalid-feedback">Select a year</small>
               </div>
               <div className="col-2">
                 <label>CVV</label>
-                <input type="text" className="form-control"></input>
+                <input type="text" className="form-control is-invalid"></input>
+                <small className="invalid-feedback">Missing or invalid CVV</small>
               </div>
             </div>
             <div className="for-check ml-3 mt-3">
