@@ -4,17 +4,12 @@ class CartSummaryItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      quantity: this.props.cartItem ? this.props.cartItem.quantity : '',
-      updateQuantity: false,
       remove: false
     };
     this.removeItemModal = this.removeItemModal.bind(this);
     this.showRemoveItemModal = this.showRemoveItemModal.bind(this);
     this.hideRemoveModal = this.hideRemoveModal.bind(this);
     this.removeFromCartConfirmation = this.removeFromCartConfirmation.bind(this);
-    this.decrementCartItem = this.decrementCartItem.bind(this);
-    this.incrementCartItem = this.incrementCartItem.bind(this);
-    this.blurCartQuantity = this.blurCartQuantity.bind(this);
   }
 
   showRemoveItemModal(event) {
@@ -66,62 +61,6 @@ class CartSummaryItem extends React.Component {
     });
   }
 
-  decrementCartItem(event) {
-    event.preventDefault();
-    const cartItemId = event.currentTarget.id;
-    let theQuantity = this.state.quantity;
-    const newQuantity = {
-      quantity: this.state.quantity - 1,
-      newTotalPrice: (this.state.quantity - 1) * this.props.cartItem.price
-    };
-    this.setState({
-      cartItemQuantity: --theQuantity,
-      update: true
-    });
-    fetch(`/api/cart/${cartItemId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newQuantity)
-    });
-  }
-
-  incrementCartItem(event) {
-    event.preventDefault();
-    const cartItemId = event.currentTarget.id;
-    let theQuantity = this.state.quantity;
-    const newQuantity = {
-      quantity: this.state.quantity + 1,
-      newTotalPrice: (this.state.quantity + 1) * this.props.cartItem.price
-    };
-    this.setState({
-      quantity: ++theQuantity,
-      update: true
-    });
-    fetch(`/api/cart/${cartItemId}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newQuantity)
-    });
-  }
-
-  componentDidUpdate() {
-    if (this.state.update === true) {
-      this.setState({
-        update: false
-      });
-      const getCart = this.props.getCartItems;
-      getCart();
-    }
-  }
-
-  blurCartQuantity(event) {
-    if (this.state.cartItemQuantity === 0) {
-      this.setState({
-        cartItemQuantity: 1
-      });
-    }
-  }
-
   render(props) {
     const cartItem = this.props.cartItem;
 
@@ -139,15 +78,6 @@ class CartSummaryItem extends React.Component {
               <h2 className="card-title">{cartItem.name}</h2>
               {totalPriceRender}
               <p className="cart-text text-secondary mt-2">Quantity: {cartItem.quantity}</p>
-              <div className="d-flex justify-content-start">
-                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.decrementCartItem} id={this.props.cartItem.cartItemId}>
-                  <i className="fas fa-minus"></i>
-                </div>
-                <input type="number" className="text-center justify-content-center inputBox" value={cartItem.quantity} onBlur={this.blurQuantity} readOnly />
-                <div className="d-flex align-items-center justify-content-center quantityStyle" onClick={this.incrementCartItem} id={this.props.cartItem.cartItemId}>
-                  <i className="fas fa-plus"></i>
-                </div>
-              </div>
               <p className="card-text mt-3">{cartItem.shortDescription}</p>
               <button onClick={this.showRemoveItemModal} className="btn btn-danger mt-2" id={cartItem.cartItemId}>Remove</button>
             </div>
