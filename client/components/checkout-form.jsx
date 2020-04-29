@@ -53,33 +53,17 @@ class CheckoutForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    // this.props.form(this.state);
-    const formValidationTest = this.state.formValidation;
-    if (this.state.name.length >= 65 || this.state.name.length < 5) {
-      formValidationTest.name = false;
-      this.setState({
-        formValidation: formValidationTest
-      });
-    } else {
-      formValidationTest.name = true;
-      this.setState({
-        formValidation: formValidationTest
-      });
-    }
-
+    this.props.form(this.state);
   }
 
   render(props) {
-    console.log(this.state.formValidation.name);
-    console.log(this.state.formValidation);
-    console.log(this.state.name);
-    const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
-    // let button;
-    // if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
-    //   button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
-    // } else {
-    const button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
-    // }
+    const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
+    let button;
+    if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
+      button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
+    } else {
+      button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
+    }
     return (
       <div className="container w-50">
         <h1>Checkout</h1>
