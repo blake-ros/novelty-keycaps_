@@ -165,7 +165,6 @@ export default class App extends React.Component {
   render() {
     console.log(this.state.view);
     const cart = this.state.cart;
-    console.log(this.state.cart);
     const cartQuantity = cart.reduce((prev, cur) => {
       return prev + cur.quantity;
     }, 0);

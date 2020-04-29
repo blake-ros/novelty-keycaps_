@@ -5,10 +5,28 @@ class CheckoutForm extends React.Component {
     super(props);
     this.state = {
       name: '',
-      creditCard: null,
-      shippingAddress: null
+      emailAddress: '',
+      phoneNumber: '',
+      shippingAddress: '',
+      shippingCity: '',
+      shippingState: '',
+      creditCard: '',
+      expirationMonth: '',
+      expirationYear: '',
+      cvv: '',
+      formValidation: {
+        name: true,
+        emailAddress: true,
+        phoneNumber: true,
+        shippingAddress: true,
+        shippingCity: true,
+        shippingState: true,
+        creditCard: true,
+        expirationMonth: true,
+        expirationYear: true,
+        cvv: true
+      }
     };
-
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.handleShipping = this.handleShipping.bind(this);
@@ -35,17 +53,33 @@ class CheckoutForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.form(this.state);
+    // this.props.form(this.state);
+    const formValidationTest = this.state.formValidation;
+    if (this.state.name.length >= 65 || this.state.name.length < 5) {
+      formValidationTest.name = false;
+      this.setState({
+        formValidation: formValidationTest
+      });
+    } else {
+      formValidationTest.name = true;
+      this.setState({
+        formValidation: formValidationTest
+      });
+    }
+
   }
 
   render(props) {
+    console.log(this.state.formValidation.name);
+    console.log(this.state.formValidation);
+    console.log(this.state.name);
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.price, 0).toFixed(2) / 100;
-    let button;
-    if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
-      button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
-    } else {
-      button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
-    }
+    // let button;
+    // if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
+    //   button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
+    // } else {
+    const button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
+    // }
     return (
       <div className="container w-50">
         <h1>Checkout</h1>
@@ -56,8 +90,8 @@ class CheckoutForm extends React.Component {
             <div className="row">
               <div className="col-6">
                 <label>Full Name</label>
-                <input type="name" className="form-control is-invalid" onChange={this.handleNameChange}></input>
-                <small className="invalid-feedback">Name needs to be more than 5 characters</small>
+                <input htmlFor="name" type="text" className={`form-control ${this.state.formValidation.name === false ? 'is-invalid' : ''}`} onChange={this.handleNameChange} maxLength="65"></input>
+                {this.state.formValidation.name === false ? <small className="invalid-feedback">Name needs to be more than 5 characters</small> : <small className="d-none"></small>}
               </div>
             </div>
             <div className="row mt-3">
@@ -206,7 +240,7 @@ class CheckoutForm extends React.Component {
               <input type="checkbox" className="form-check-input" id="check"></input>
               <label className="form-check-label" htmlFor="check"><b>I understand to not use my personal information at checkout</b></label>
             </div>
-            <button className="btn btn-info mt-5" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>{button}
+            <button className="btn btn-info mt-5" onClick={() => this.props.onRender('checkout', {})}>Continue Shopping</button>{button}
           </div>
         </form>
       </div>
