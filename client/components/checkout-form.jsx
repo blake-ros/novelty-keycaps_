@@ -59,7 +59,7 @@ class CheckoutForm extends React.Component {
       button = <button className="btn btn-primary float-right mt-5 mr-5" onClick={this.renderOrderConfirmationModal} onSubmit={this.renderOrderConfirmationModal}>Place Order</button>;
     }
     return (
-      <div className="container w-50">
+      <div className="container-fluid col-xl-6 col-lg-6">
         <h1>Checkout</h1>
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
