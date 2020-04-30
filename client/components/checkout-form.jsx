@@ -7,12 +7,13 @@ class CheckoutForm extends React.Component {
       name: '',
       shippingAddress: '',
       creditCard: '',
-      orderConfirmation: false
+      terms: false
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.handleShipping = this.handleShipping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTerms = this.handleTerms.bind(this);
   }
 
   handleNameChange(event) {
@@ -33,6 +34,12 @@ class CheckoutForm extends React.Component {
     });
   }
 
+  handleTerms(event) {
+    this.setState({
+      terms: true
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.form(this.state);
@@ -43,6 +50,7 @@ class CheckoutForm extends React.Component {
   }
 
   render(props) {
+    console.log(this.state);
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
     let button;
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
@@ -63,8 +71,7 @@ class CheckoutForm extends React.Component {
             <label className="mt-2">Shipping Address</label>
             <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
             <div className="for-check ml-3 mt-3">
-              <input type="checkbox" className="form-check-input" id="check"></input>
-              <label className="form-check-label" htmlFor="check"><b>I understand to not use my personal information at checkout</b></label>
+              <b>Reminder: <br></br>Do not use any personal information at checkout</b>
             </div>
             <button className="btn btn-info mt-5" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>{button}
           </div>

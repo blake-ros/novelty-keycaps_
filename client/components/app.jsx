@@ -113,7 +113,6 @@ export default class App extends React.Component {
   }
 
   placeOrder(orderObj) {
-
     fetch('/api/orders', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -146,7 +145,6 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
-
     function filterCart(cart) {
       return cart.cartItemId !== cartItemId;
     }
@@ -165,7 +163,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.view);
     const cart = this.state.cart;
     const cartQuantity = cart.reduce((prev, cur) => {
       return prev + cur.quantity;
