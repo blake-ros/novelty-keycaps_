@@ -8,7 +8,7 @@ class OrderConfirmation extends React.Component {
 
   changeToHome(event) {
     event.preventDefault();
-    this.props.onRender('catalog');
+    this.props.onRender('catalog', {});
   }
 
   render() {

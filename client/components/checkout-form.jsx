@@ -13,9 +13,6 @@ class CheckoutForm extends React.Component {
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.handleShipping = this.handleShipping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.orderConfirmation = this.orderConfirmation.bind(this);
-    this.removeOrderConfirmationModal = this.removeOrderConfirmationModal.bind(this);
-    this.renderOrderConfirmationModal = this.renderOrderConfirmationModal.bind(this);
   }
 
   handleNameChange(event) {
@@ -45,25 +42,7 @@ class CheckoutForm extends React.Component {
     });
   }
 
-  renderOrderConfirmationModal(event) {
-    this.setState({
-      orderConfirmation: true
-    });
-  }
-
-  // orderConfirmation() {
-
-  // }
-
-  removeOrderConfirmationModal(event) {
-    this.setState({
-      orderConfirmation: false
-    });
-    this.props.onRender('catalog', {});
-  }
-
   render(props) {
-    console.log(this.state);
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
     let button;
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
