@@ -6,12 +6,16 @@ class CheckoutForm extends React.Component {
     this.state = {
       name: '',
       shippingAddress: '',
-      creditCard: ''
+      creditCard: '',
+      orderConfirmation: false
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.handleShipping = this.handleShipping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    // this.orderConfirmation = this.orderConfirmation.bind(this);
+    this.removeOrderConfirmationModal = this.removeOrderConfirmationModal.bind(this);
+    this.renderOrderConfirmationModal = this.renderOrderConfirmationModal.bind(this);
   }
 
   handleNameChange(event) {
@@ -35,15 +39,37 @@ class CheckoutForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.form(this.state);
+
+    this.setState({
+      view: 'order'
+    });
+  }
+
+  renderOrderConfirmationModal(event) {
+    this.setState({
+      orderConfirmation: true
+    });
+  }
+
+  // orderConfirmation() {
+
+  // }
+
+  removeOrderConfirmationModal(event) {
+    this.setState({
+      orderConfirmation: false
+    });
+    this.props.onRender('catalog', {});
   }
 
   render(props) {
+    console.log(this.state);
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
     let button;
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
       button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
     } else {
-      button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
+      button = <button className="btn btn-primary float-right mt-5 mr-5" onClick={this.renderOrderConfirmationModal} onSubmit={this.renderOrderConfirmationModal}>Place Order</button>;
     }
     return (
       <div className="container w-50">
