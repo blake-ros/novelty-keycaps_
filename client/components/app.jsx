@@ -6,6 +6,7 @@ import CartSummary from './cart-summary.jsx';
 import CheckoutForm from './checkout-form.jsx';
 import Sponsors from './sponsors.jsx';
 import Carousel from './carousel.jsx';
+import OrderConfirmation from './confirmation.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -121,7 +122,7 @@ export default class App extends React.Component {
       .then(data => {
         this.setState({
           cart: [],
-          view: { name: 'catalog', params: {} }
+          view: { name: 'order', params: {} }
         });
       });
   }
@@ -144,7 +145,6 @@ export default class App extends React.Component {
   }
 
   removeItem(cartItemId) {
-
     function filterCart(cart) {
       return cart.cartItemId !== cartItemId;
     }
@@ -163,7 +163,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.view);
     const cart = this.state.cart;
     const cartQuantity = cart.reduce((prev, cur) => {
       return prev + cur.quantity;
@@ -179,6 +178,8 @@ export default class App extends React.Component {
       conditionalRender = <CartSummary onRender={this.setView} newState={myState.params} cart={this.state.cart} getCartItems={this.getCartItems} removeItem={this.removeItem} addtoCart={this.props.addToCart} />;
     } else if (myState.name === 'checkout') {
       conditionalRender = <CheckoutForm onRender={this.setView} newState={myState.params} cart={this.state.cart} form={this.placeOrder}/>;
+    } else if (myState.name === 'order') {
+      return <OrderConfirmation onRender={this.setView} />;
     }
 
     let carouselRender;

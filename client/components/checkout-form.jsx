@@ -6,12 +6,14 @@ class CheckoutForm extends React.Component {
     this.state = {
       name: '',
       shippingAddress: '',
-      creditCard: ''
+      creditCard: '',
+      terms: false
     };
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCreditCard = this.handleCreditCard.bind(this);
     this.handleShipping = this.handleShipping.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleTerms = this.handleTerms.bind(this);
   }
 
   handleNameChange(event) {
@@ -32,9 +34,19 @@ class CheckoutForm extends React.Component {
     });
   }
 
+  handleTerms(event) {
+    this.setState({
+      terms: true
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.form(this.state);
+
+    this.setState({
+      view: 'order'
+    });
   }
 
   render(props) {
@@ -43,10 +55,10 @@ class CheckoutForm extends React.Component {
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
       button = <button className="btn btn-primary float-right mt-5 mr-5 disabled" disabled={true}>Place Order</button>;
     } else {
-      button = <button type="submit" className="btn btn-primary float-right mt-5 mr-5">Place Order</button>;
+      button = <button className="btn btn-primary float-right mt-5 mr-5" onClick={this.renderOrderConfirmationModal} onSubmit={this.renderOrderConfirmationModal}>Place Order</button>;
     }
     return (
-      <div className="container w-50">
+      <div className="container-fluid col-xl-6 col-lg-6">
         <h1>Checkout</h1>
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
@@ -58,8 +70,7 @@ class CheckoutForm extends React.Component {
             <label className="mt-2">Shipping Address</label>
             <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
             <div className="for-check ml-3 mt-3">
-              <input type="checkbox" className="form-check-input" id="check"></input>
-              <label className="form-check-label" htmlFor="check"><b>I understand to not use my personal information at checkout</b></label>
+              <b>Reminder: <br></br>Do not use any personal information at checkout</b>
             </div>
             <button className="btn btn-info mt-5" onClick={() => this.props.onRender('catalog', {})}>Continue Shopping</button>{button}
           </div>
