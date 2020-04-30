@@ -62,12 +62,12 @@ class CheckoutForm extends React.Component {
         <h1>Checkout</h1>
         <h2 className="text-secondary">Order Total: ${cartTotal}</h2>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group mt-2" >
+          <div className="form-group mt-3" >
             <label>Name</label>
             <input type="name" className="form-control" onChange={this.handleNameChange}></input>
-            <label className="mt-2">Credit Card</label>
+            <label className="mt-3">Credit Card</label>
             <input type="credit-card" className="form-control" onChange={this.handleCreditCard}></input>
-            <label className="mt-2">Shipping Address</label>
+            <label className="mt-3">Shipping Address</label>
             <textarea type="shipping-address" className="form-control" onChange={this.handleShipping}></textarea>
             <div className="for-check ml-3 mt-3">
               <b>Reminder: <br></br>Do not use any personal information at checkout</b>
