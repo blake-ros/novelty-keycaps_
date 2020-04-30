@@ -50,7 +50,6 @@ class CheckoutForm extends React.Component {
   }
 
   render(props) {
-    console.log(this.state);
     const cartTotal = this.props.cart.reduce((cur, acc) => cur + acc.totalPrice, 0).toFixed(2) / 100;
     let button;
     if (!this.state.name || !this.state.shippingAddress || !this.state.creditCard) {
