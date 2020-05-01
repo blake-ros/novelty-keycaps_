@@ -21,4 +21,4 @@ Link: https://wicked-sales.blakeros.com/
 
 ## Preview 
 
-![](server/public/images/wickedSalesPreview.PNG)
+![](server/public/images/novelty-preview-image.PNG)
