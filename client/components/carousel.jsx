@@ -30,7 +30,7 @@ class Carousel extends React.Component {
             <div className="h-100 w-100 carousel-slide slide-3" />
             <div className="carousel-caption d-md-block center-caption">
               <h3>Products That Last</h3>
-              <p>We garantee that our products will satisfy your need to give your keyboard life.</p>
+              <p>We guarantee that our products will satisfy your need to give your keyboard life.</p>
             </div>
           </div>
         </div>
