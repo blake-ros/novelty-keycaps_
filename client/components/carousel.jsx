@@ -23,14 +23,14 @@ class Carousel extends React.Component {
             <img src="./images/carousel-image-2.jpg" className="d-block w-100 carousel-image" />
             <div className="carousel-caption d-md-block center-caption">
               <h3>Vendors You Trust</h3>
-              <p>At Novelty Keycaps_ we only carry the best brands.</p>
+              <p>At Novelty Keycaps_ we only carry the best brands</p>
             </div>
           </div>
           <div className="carousel-item" data-interval="5000">
             <div className="h-100 w-100 carousel-slide slide-3" />
             <div className="carousel-caption d-md-block center-caption">
               <h3>Products That Last</h3>
-              <p>We guarantee that our products will satisfy your need to give your keyboard life.</p>
+              <p>We guarantee that our products will satisfy your need to give your keyboard life</p>
             </div>
           </div>
         </div>
