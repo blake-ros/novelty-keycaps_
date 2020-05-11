@@ -6,7 +6,7 @@ A full stack e-commerce web application
 - React
 - JavaScript
 - Node.js
-- Postgresql
+- PostgreSQL
 
 ## Live Demo
 
